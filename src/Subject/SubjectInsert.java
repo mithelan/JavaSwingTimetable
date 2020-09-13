@@ -149,8 +149,8 @@ public class SubjectInsert extends javax.swing.JFrame {
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(330, 330, 330)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addGap(310, 310, 310))
         );
         layout.setVerticalGroup(
@@ -223,7 +223,7 @@ public class SubjectInsert extends javax.swing.JFrame {
                  
        
           
-            String sql = "INSERT INTO subject(year,semester,sname,scode,lduration,tduration,eduration,labhour)  VALUES('" + yearval + "','" + semesterval + "','" + sname.getText() + "','" + scode.getText() + "','" + lduration.getText() + "','" + tduration.getText() + "','" + eduration.getText() +"','" + labhour.getText() + "'   )";
+            String sql = "INSERT INTO subjectnew(year,semester,sname,scode,lduration,tduration,eduration,labhour)  VALUES('" + yearval + "','" + semesterval + "','" + sname.getText() + "','" + scode.getText() + "','" + lduration.getText() + "','" + tduration.getText() + "','" + eduration.getText() +"','" + labhour.getText() + "'   )";
             System.out.println(year);   
         
           

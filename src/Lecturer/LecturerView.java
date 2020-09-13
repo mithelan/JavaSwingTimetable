@@ -37,7 +37,7 @@ public class LecturerView extends javax.swing.JFrame {
 
             Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/spm","root","");
     
-            String query="select * from wwwq";
+            String query="select * from lecturernew";
             Statement st=conn.createStatement();
             
             ResultSet rs=st.executeQuery(query);
@@ -326,7 +326,7 @@ public class LecturerView extends javax.swing.JFrame {
             
             int row =jTable_display.getSelectedRow();
             String value=(jTable_display.getModel().getValueAt(row,2).toString());
-            String query="UPDATE WWWQ SET firstname=?,lastname=?,faculty=?,building=?,center=?,department=?,level=?,rank=? where empid="+value;
+            String query="UPDATE lecturernew SET firstname=?,lastname=?,faculty=?,building=?,center=?,department=?,level=?,rank=? where empid="+value;
             
             String facultyvalue=faculty.getSelectedItem().toString();
               String centervalue=center.getSelectedItem().toString();
@@ -484,7 +484,7 @@ String rank=jLabel10.getText();
             Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/spm","root","");
            int row=jTable_display.getSelectedRow();
            String value=(jTable_display.getModel().getValueAt(row, 2).toString());
-           String query="delete from wwwq where empid="+value;
+           String query="delete from lecturernew where empid="+value;
            PreparedStatement pst=conn.prepareStatement(query);
            pst.executeUpdate();
            DefaultTableModel model=(DefaultTableModel)jTable_display.getModel();

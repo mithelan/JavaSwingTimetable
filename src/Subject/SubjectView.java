@@ -40,7 +40,7 @@ public class SubjectView extends javax.swing.JFrame {
 
             Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/spm","root","");
     
-            String query="select * from subject";
+            String query="select * from subjectnew";
             Statement st=conn.createStatement();
             
             ResultSet rs=st.executeQuery(query);
@@ -410,7 +410,7 @@ public class SubjectView extends javax.swing.JFrame {
             int row =subjectTable.getSelectedRow();
             
             String value=(subjectTable.getModel().getValueAt(row,8).toString());
-            String query="UPDATE SUBJECT SET year=?,semester=?,sname=?,lduration=?,tduration=?,eduration=?,labhour=? where id="+value;
+            String query="UPDATE subjectnew SET year=?,semester=?,sname=?,lduration=?,tduration=?,eduration=?,labhour=? where id="+value;
             
             String yearvalue=year.getSelectedItem().toString();
               String semestervalue=semester.getSelectedItem().toString();
@@ -450,7 +450,7 @@ public class SubjectView extends javax.swing.JFrame {
             Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/spm","root","");
            int row=subjectTable.getSelectedRow();
            String value=(subjectTable.getModel().getValueAt(row,8).toString());
-           String query="delete from subject where id="+value;
+           String query="delete from subjectnew where id="+value;
            PreparedStatement pst=conn.prepareStatement(query);
            pst.executeUpdate();
            DefaultTableModel model=(DefaultTableModel)subjectTable.getModel();

@@ -16,7 +16,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;    
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
-import net.proteanit.sql.DbUtils;
+
 import javax.swing.JPanel;
 
 /**

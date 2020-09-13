@@ -235,7 +235,7 @@ public class LecuturerInsert extends javax.swing.JFrame {
                jLabel10.setText(levelvalue+"."+empid.getText());
                
                String rank=jLabel10.getText();
-            String sql = "INSERT INTO wwwq(firstname,lastname,empid,faculty,building,center,department,level,rank)  VALUES('" + firstname.getText() + "','" + lastname.getText() + "','" + empid.getText() + "','" + facultyvalue + "','" + building.getText() + "','" + centervalue + "','" + department.getText() +"','"+levelvalue+ "' ,'" + rank + "'   )";
+            String sql = "INSERT INTO lecturernew(firstname,lastname,empid,faculty,building,center,department,level,rank)  VALUES('" + firstname.getText() + "','" + lastname.getText() + "','" + empid.getText() + "','" + facultyvalue + "','" + building.getText() + "','" + centervalue + "','" + department.getText() +"','"+levelvalue+ "' ,'" + rank + "'   )";
             System.out.println(firstname.getText());
         
           
