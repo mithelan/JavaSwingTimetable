@@ -4,8 +4,13 @@
  * and open the template in the editor.
  */
 package spm;
-import Lecturer.LecuturerInsert;
+import group.Group;
+import grpgenerate.grpidgenerate;
 import spm.Admin;
+import spm.programme.Programme;
+import subgroup.Subgroup;
+import subgrpgenerate.subgroupidgen;
+import tags.Tags;
 /**
  *
  * @author Microsoft
@@ -17,8 +22,9 @@ public class SPM {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-      MainUI ui=new MainUI();
-      ui.setVisible(true);
+         Home  pro=new Home();
+         pro.setVisible(true);
+         
                 
     }
     
