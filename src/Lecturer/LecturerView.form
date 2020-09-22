@@ -54,9 +54,9 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="building" max="32767" attributes="0"/>
-                          <Component id="faculty" min="-2" pref="115" max="-2" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="faculty" min="-2" pref="115" max="-2" attributes="0"/>
                                   <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
                                       <Component id="department" max="32767" attributes="0"/>
                                       <Component id="center" min="-2" pref="111" max="-2" attributes="0"/>

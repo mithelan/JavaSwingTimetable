@@ -380,7 +380,7 @@ String rank=jLabel10.getText();
  JOptionPane.showMessageDialog(null,"Updated Sucessfully");
             
         }catch(Exception e ){
-            JOptionPane.showMessageDialog(null,e);
+            JOptionPane.showMessageDialog(null,"Invalid Input");
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
