@@ -7,6 +7,7 @@ package Lecturer;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -22,6 +23,25 @@ public class LecuturerInsert extends javax.swing.JFrame {
      */
     public LecuturerInsert() {
         initComponents();
+        buildingData();
+    }
+    
+      public void buildingData(){
+        
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/spm","root","");
+            Statement st=conn.createStatement();
+            String selectQuery="select building_name from buildings";
+            ResultSet rs=st.executeQuery(selectQuery);
+             while(rs.next())
+             {
+              buildingCombo.addItem(rs.getString("building_name"));
+             }
+
+             }catch(Exception e ){
+            JOptionPane.showMessageDialog(null,e);
+        }
     }
 
     /**
@@ -50,10 +70,10 @@ public class LecuturerInsert extends javax.swing.JFrame {
         firstname = new javax.swing.JTextField();
         lastname = new javax.swing.JTextField();
         empid = new javax.swing.JTextField();
-        building = new javax.swing.JTextField();
         department = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
+        buildingCombo = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -110,9 +130,9 @@ public class LecuturerInsert extends javax.swing.JFrame {
                             .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(building)
                             .addComponent(faculty, 0, 1, Short.MAX_VALUE)
-                            .addComponent(center, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(center, 0, 120, Short.MAX_VALUE)
+                            .addComponent(buildingCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
@@ -180,13 +200,13 @@ public class LecuturerInsert extends javax.swing.JFrame {
                     .addComponent(jLabel5))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(building, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
+                    .addComponent(jLabel6)
+                    .addComponent(buildingCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(center, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(department, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
@@ -208,7 +228,8 @@ public class LecuturerInsert extends javax.swing.JFrame {
             
               String facultyvalue=faculty.getSelectedItem().toString();
               String centervalue=center.getSelectedItem().toString();
-                  String levelvalue=level.getSelectedItem().toString();
+              String levelvalue=level.getSelectedItem().toString();
+              String buildingValue=buildingCombo.getSelectedItem().toString();
                   
         if (levelvalue == "Professor") {
 
@@ -234,8 +255,8 @@ public class LecuturerInsert extends javax.swing.JFrame {
         }
                jLabel10.setText(levelvalue+"."+empid.getText());
                
-               String rank=jLabel10.getText();
-            String sql = "INSERT INTO lecturernew(firstname,lastname,empid,faculty,building,center,department,level,rank)  VALUES('" + firstname.getText() + "','" + lastname.getText() + "','" + empid.getText() + "','" + facultyvalue + "','" + building.getText() + "','" + centervalue + "','" + department.getText() +"','"+levelvalue+ "' ,'" + rank + "'   )";
+            String rank=jLabel10.getText();
+            String sql = "INSERT INTO lecturernew(firstname,lastname,empid,faculty,building,center,department,level,rank)  VALUES('" + firstname.getText() + "','" + lastname.getText() + "','" + empid.getText() + "','" + facultyvalue + "','" + buildingValue + "','" + centervalue + "','" + department.getText() +"','"+levelvalue+ "' ,'" + rank + "'   )";
             System.out.println(firstname.getText());
         
           
@@ -279,7 +300,7 @@ public class LecuturerInsert extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField building;
+    private javax.swing.JComboBox<String> buildingCombo;
     private javax.swing.JComboBox<String> center;
     private javax.swing.JTextField department;
     private javax.swing.JTextField empid;

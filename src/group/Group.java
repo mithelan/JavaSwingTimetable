@@ -37,7 +37,7 @@ public class Group extends javax.swing.JFrame {
      try{
            Class.forName("com.mysql.jdbc.Driver");
            
-           Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3307/SPM","root","Vithu719@");
+           Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/SPM","root","");
           String query="select * from groupid";
           Statement st=conn.createStatement();
           ResultSet rs=st.executeQuery(query);
@@ -205,7 +205,7 @@ public class Group extends javax.swing.JFrame {
          try{
            Class.forName("com.mysql.jdbc.Driver");
            
-           Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3307/SPM","root","Vithu719@");
+           Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/SPM","root","");
             String query="insert into groupid (groupid) values (?)";
             PreparedStatement pst=conn.prepareStatement(query);
             pst.setString(1, groupid.getText());
@@ -242,7 +242,7 @@ public class Group extends javax.swing.JFrame {
          try{
            Class.forName("com.mysql.jdbc.Driver");
            
-           Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3307/SPM","root","Vithu719@");
+           Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/SPM","root","");
            int row=grouptable.getSelectedRow();
            String value=(grouptable.getModel().getValueAt(row, 0).toString());
            String query="delete from groupid where id="+value;
@@ -266,7 +266,7 @@ public class Group extends javax.swing.JFrame {
          try{
            Class.forName("com.mysql.jdbc.Driver");
            
-           Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3307/SPM","root","Vithu719@");
+           Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/SPM","root","");
            int row=grouptable.getSelectedRow();
            String value=(grouptable.getModel().getValueAt(row, 0).toString());
            String query="UPDATE groupid SET groupid=? where id="+value;

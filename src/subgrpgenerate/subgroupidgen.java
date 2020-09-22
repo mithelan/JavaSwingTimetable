@@ -139,6 +139,11 @@ public void showgenerationsub(){
         jLabel4.setText("Group");
 
         group.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "COPY_PASTE", "JARVIS" }));
+        group.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                groupActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("Sub Group");
 
@@ -312,6 +317,10 @@ public void showgenerationsub(){
         Home home =new Home();
         home.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void groupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_groupActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_groupActionPerformed
 
     /**
      * @param args the command line arguments

@@ -36,7 +36,7 @@ public class Tags extends javax.swing.JFrame {
      try{
            Class.forName("com.mysql.jdbc.Driver");
            
-           Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3307/SPM","root","Vithu719@");
+           Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/SPM","root","");
           String query="select * from tags";
           Statement st=conn.createStatement();
           ResultSet rs=st.executeQuery(query);
@@ -208,7 +208,7 @@ public class Tags extends javax.swing.JFrame {
         try{
            Class.forName("com.mysql.jdbc.Driver");
            
-           Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3307/SPM","root","Vithu719@");
+           Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/SPM","root","");
            int row=tagtable.getSelectedRow();
            String value=(tagtable.getModel().getValueAt(row, 0).toString());
            String query="delete from tags where id="+value;
@@ -232,7 +232,7 @@ public class Tags extends javax.swing.JFrame {
           try{
            Class.forName("com.mysql.jdbc.Driver");
            
-           Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3307/SPM","root","Vithu719@");
+           Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/SPM","root","");
            int row=tagtable.getSelectedRow();
            String value=(tagtable.getModel().getValueAt(row, 0).toString());
            String query="UPDATE tags SET tag=? where id="+value;
@@ -258,7 +258,7 @@ public class Tags extends javax.swing.JFrame {
          try{
            Class.forName("com.mysql.jdbc.Driver");
            
-           Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3307/SPM","root","Vithu719@");
+           Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/SPM","root","");
             String query="insert into tags (tag) values (?)";
             PreparedStatement pst=conn.prepareStatement(query);
             pst.setString(1, tag.getText());
