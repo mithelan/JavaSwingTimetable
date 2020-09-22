@@ -287,8 +287,8 @@ public class WorkingDays extends javax.swing.JFrame {
            
            String query="INSERT INTO workingdays(empID,empName,dayNo,wDays,wTimePerDay,timeSlot) VALUES(?,?,?,?,?,?)";
            PreparedStatement pst = conn.prepareStatement(query);
-          pst.setString(1,empID.getText());
-          pst.setString(2,empName.getText());
+//          pst.setString(1,empID.getText());
+//          pst.setString(2,empName.getText());
           String daysNo;
           daysNo=dayNo.getSelectedItem().toString();
           pst.setString(3,daysNo);
@@ -362,8 +362,8 @@ public class WorkingDays extends javax.swing.JFrame {
 
     private void Reset1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Reset1ActionPerformed
         // TODO add your handling code here:
-        empID.setText("");
-        empName.setText("");
+//        empID.setText("");
+//        empName.setText("");
         dayNo.setSelectedIndex(0);
         Monday.setSelected(false);
         Tuesday.setSelected(false);
