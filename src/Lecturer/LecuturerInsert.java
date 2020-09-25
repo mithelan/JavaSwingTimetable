@@ -116,6 +116,11 @@ public class LecuturerInsert extends javax.swing.JFrame {
         jLabel9.setText("Level :");
 
         level.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Professor", "Assistant Professor", "Senior Lecturer(HG)", "Senior Lecturer", "Lecutuer", "Instructor", "Assitant Instructor" }));
+        level.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                levelActionPerformed(evt);
+            }
+        });
 
         jLabel11.setText("Rank :");
 
@@ -281,6 +286,10 @@ public class LecuturerInsert extends javax.swing.JFrame {
     private void centerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_centerActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_centerActionPerformed
+
+    private void levelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_levelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_levelActionPerformed
 
     /**
      * @param args the command line arguments
