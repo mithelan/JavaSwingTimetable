@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -97,6 +98,11 @@ public class LecuturerInsert extends javax.swing.JFrame {
         faculty.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Computing", "Business", "Engineering", "Humanities & Sciences" }));
 
         center.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Malabe", "Metro", "Matara", "Kandy", "Kurunagala", "Jaffna" }));
+        center.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                centerActionPerformed(evt);
+            }
+        });
 
         jButton1.setBackground(new java.awt.Color(0, 0, 255));
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
@@ -110,6 +116,11 @@ public class LecuturerInsert extends javax.swing.JFrame {
         jLabel9.setText("Level :");
 
         level.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Professor", "Assistant Professor", "Senior Lecturer(HG)", "Senior Lecturer", "Lecutuer", "Instructor", "Assitant Instructor" }));
+        level.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                levelActionPerformed(evt);
+            }
+        });
 
         jLabel11.setText("Rank :");
 
@@ -257,16 +268,28 @@ public class LecuturerInsert extends javax.swing.JFrame {
                
             String rank=jLabel10.getText();
             String sql = "INSERT INTO lecturernew(firstname,lastname,empid,faculty,building,center,department,level,rank)  VALUES('" + firstname.getText() + "','" + lastname.getText() + "','" + empid.getText() + "','" + facultyvalue + "','" + buildingValue + "','" + centervalue + "','" + department.getText() +"','"+levelvalue+ "' ,'" + rank + "'   )";
-            System.out.println(firstname.getText());
+            
+            if(firstname.getText().isEmpty()){
+                String message="All Field Should be filled";
+                 
+            }
         
           
             Statement st=conn.createStatement();
             st.executeUpdate(sql);
- JOptionPane.showMessageDialog(null,"Added Sucessfully");
+            JOptionPane.showMessageDialog(null,"Added Sucessfully");
         }catch(Exception e ){
-            JOptionPane.showMessageDialog(null,e);
+            JOptionPane.showMessageDialog(null,"Invalid Input or cannot enter the same employee again");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void centerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_centerActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_centerActionPerformed
+
+    private void levelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_levelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_levelActionPerformed
 
     /**
      * @param args the command line arguments
