@@ -29,15 +29,49 @@ public class subgroupidgen extends javax.swing.JFrame {
     public subgroupidgen() {
         initComponents();
         showgenerationsub();
+        tutorialdrop();
     }
 
+    
+    
+          private void tutorialdrop(){
+          try{
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/spm","root","");
+                String q="Tutorial";
+            String sql = "SELECT grpidg FROM grpidgen";
+            com.mysql.jdbc.PreparedStatement pstmt = (com.mysql.jdbc.PreparedStatement) conn.prepareStatement(sql);
+            ResultSet rs = pstmt.executeQuery();
+           
+            while(rs.next())
+            {
+                group.addItem(rs.getString("grpidg"));             
+            }
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null,e);
+        } 
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
       public ArrayList<SubGen> generatedetailssubretrieve(){
     ArrayList<SubGen> genlist=new ArrayList<>();
      try{
            Class.forName("com.mysql.jdbc.Driver");
            
-           Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3307/SPM","root","Vithu719@");
+           Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/SPM","root","");
           String query="select * from subgrpidgen";
           Statement st=conn.createStatement();
           ResultSet rs=st.executeQuery(query);
@@ -93,12 +127,6 @@ public void showgenerationsub(){
 
         jScrollPane1 = new javax.swing.JScrollPane();
         subgeneration = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
-        year = new javax.swing.JComboBox<>();
-        jLabel2 = new javax.swing.JLabel();
-        semester = new javax.swing.JComboBox<>();
-        jLabel3 = new javax.swing.JLabel();
-        programme = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         group = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
@@ -124,21 +152,8 @@ public void showgenerationsub(){
         });
         jScrollPane1.setViewportView(subgeneration);
 
-        jLabel1.setText("Year");
-
-        year.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4" }));
-
-        jLabel2.setText("Semester");
-
-        semester.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", " " }));
-
-        jLabel3.setText("Programme");
-
-        programme.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "IT", "CSE", "SE" }));
-
         jLabel4.setText("Group");
 
-        group.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "COPY_PASTE", "JARVIS" }));
         group.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 groupActionPerformed(evt);
@@ -183,26 +198,18 @@ public void showgenerationsub(){
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(326, 326, 326)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel3)))
+                        .addGap(330, 330, 330)
+                        .addComponent(jLabel5))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))))
+                        .addComponent(jLabel4)))
                 .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(semester, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(programme, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(group, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(subgroup, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(year, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(174, Short.MAX_VALUE))
+                    .addComponent(subgroup, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(232, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(add)
@@ -218,23 +225,11 @@ public void showgenerationsub(){
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(91, 91, 91)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(year, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(semester, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(programme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
                     .addComponent(group, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
+                .addGap(123, 123, 123)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(subgroup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -253,18 +248,16 @@ public void showgenerationsub(){
          try{
            Class.forName("com.mysql.jdbc.Driver");
            
-           Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3307/SPM","root","Vithu719@");
+           Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/SPM","root","");
             String query="insert into subgrpidgen (subgrpidg) values (?)";
             PreparedStatement pst=conn.prepareStatement(query);
            
             String sem,yr,prg,grp,subgrp;
-            sem=semester.getSelectedItem().toString();
-            yr=year.getSelectedItem().toString();
-            prg=programme.getSelectedItem().toString();
+            
             grp=group.getSelectedItem().toString();
             subgrp=subgroup.getSelectedItem().toString();
             String generated_id;
-            generated_id=" "+yr+"."+sem+"."+prg+"."+grp+"."+subgrp+" ";
+            generated_id=grp+"."+subgrp+" ";
             pst.setString(1, generated_id);
             pst.executeUpdate();
             DefaultTableModel model=(DefaultTableModel)subgeneration.getModel();
@@ -294,7 +287,7 @@ public void showgenerationsub(){
          try{
            Class.forName("com.mysql.jdbc.Driver");
            
-           Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3307/SPM","root","Vithu719@");
+           Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/SPM","root","");
            int row=subgeneration.getSelectedRow();
            String value=(subgeneration.getModel().getValueAt(row, 0).toString());
            String query="delete from subgrpidgen where id="+value;
@@ -363,16 +356,10 @@ public void showgenerationsub(){
     private javax.swing.JButton delete;
     private javax.swing.JComboBox<String> group;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JComboBox<String> programme;
-    private javax.swing.JComboBox<String> semester;
     private javax.swing.JTable subgeneration;
     private javax.swing.JComboBox<String> subgroup;
-    private javax.swing.JComboBox<String> year;
     // End of variables declaration//GEN-END:variables
 }
