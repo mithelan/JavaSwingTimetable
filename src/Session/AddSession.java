@@ -309,6 +309,11 @@ public class AddSession extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         lecCombo1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-" }));
+        lecCombo1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lecCombo1ActionPerformed(evt);
+            }
+        });
 
         lecCombo2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-" }));
 
@@ -704,7 +709,7 @@ public class AddSession extends javax.swing.JFrame {
             String lectureValue2 = lecCombo2.getSelectedItem().toString();
             String lectureValue3 = lecCombo3.getSelectedItem().toString();
             String lectureValue4 = lecCombo4.getSelectedItem().toString();
-            String TotalLec=lectureValue1+lectureValue2+lectureValue3+lectureValue4;
+            String TotalLec=lectureValue1+","+lectureValue2+","+lectureValue3+","+lectureValue4;
             String tagValue = tagCombo.getSelectedItem().toString();
             String studentGroupValue = groupidCombo.getSelectedItem().toString();
             String subjectValue = subjectCombo.getSelectedItem().toString();
@@ -991,6 +996,10 @@ public class AddSession extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e);
         }
     }//GEN-LAST:event_searchLectuKeyReleased
+
+    private void lecCombo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lecCombo1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lecCombo1ActionPerformed
 
     private void StateChange() {
         lecCombo1.setVisible(true);
