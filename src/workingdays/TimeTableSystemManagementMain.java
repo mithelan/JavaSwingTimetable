@@ -125,16 +125,16 @@ public class TimeTableSystemManagementMain extends javax.swing.JFrame {
 
     private void viewWorkingDaysActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewWorkingDaysActionPerformed
         // TODO add your handling code here:
-         UpdateWorkingDays updateWorkingDays = new UpdateWorkingDays();
-             updateWorkingDays.setVisible(true);
-             updateWorkingDays.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+//         UpdateWorkingDays updateWorkingDays = new UpdateWorkingDays();
+//             updateWorkingDays.setVisible(true);
+//             updateWorkingDays.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_viewWorkingDaysActionPerformed
 
     private void addWorkingDaysActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addWorkingDaysActionPerformed
         // TODO add your handling code here:
-         WorkingDays workingDays = new WorkingDays();
-             workingDays.setVisible(true);
-             workingDays.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+//         WorkingDays workingDays = new WorkingDays();
+//             workingDays.setVisible(true);
+//             workingDays.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_addWorkingDaysActionPerformed
 
     /**

@@ -18,9 +18,9 @@ public class TimetableManagement {
         // TODO code application logic here
           // TimeTableSystemManagementMain timeTableSystemManagementMain =new TimeTableSystemManagementMain();
              //   new TimeTableSystemManagementMain().setVisible(true);
-             
-             WorkingDays workingDays =new WorkingDays();
-             new WorkingDays().setVisible(true);
+//             
+//             WorkingDays workingDays =new WorkingDays();
+//             new WorkingDays().setVisible(true);
                 
                 
     }
