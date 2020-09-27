@@ -3,16 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Z:/SLIIT/3rd%20Year/2nd%20Semster/SPM/SPM/src/Session/AddSession.java</file>
-            <file>file:/Z:/SLIIT/3rd%20Year/2nd%20Semster/SPM/SPM/src/group/Grpdetails.java</file>
-            <file>file:/Z:/SLIIT/3rd%20Year/2nd%20Semster/SPM/SPM/src/Lecturer/LecturerView.java</file>
-            <file>file:/Z:/SLIIT/3rd%20Year/2nd%20Semster/SPM/SPM/src/Session/Session.java</file>
-            <file>file:/Z:/SLIIT/3rd%20Year/2nd%20Semster/SPM/SPM/src/grpgenerate/grpidgenerate.java</file>
-            <file>file:/Z:/SLIIT/3rd%20Year/2nd%20Semster/SPM/SPM/src/subgrpgenerate/subgroupidgen.java</file>
-            <file>file:/Z:/SLIIT/3rd%20Year/2nd%20Semster/SPM/SPM/src/locations/LocationInsert.java</file>
-            <file>file:/Z:/SLIIT/3rd%20Year/2nd%20Semster/SPM/SPM/src/Session/GenerateSession.java</file>
-            <file>file:/Z:/SLIIT/3rd%20Year/2nd%20Semster/SPM/SPM/src/Session/getSession.java</file>
-            <file>file:/Z:/SLIIT/3rd%20Year/2nd%20Semster/SPM/SPM/src/Session/SessionId.java</file>
+            <file>file:/Z:/SLIIT/3rd%20Year/2nd%20Semster/SPM/SPM/src/Lecturer/LecuturerInsert.java</file>
+            <file>file:/Z:/SLIIT/3rd%20Year/2nd%20Semster/SPM/SPM/src/spm/MainUI.java</file>
+            <file>file:/Z:/SLIIT/3rd%20Year/2nd%20Semster/SPM/SPM/src/Subject/SubjectInsert.java</file>
         </group>
     </open-files>
 </project-private>
