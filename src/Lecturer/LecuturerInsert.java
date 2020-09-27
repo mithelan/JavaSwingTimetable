@@ -10,7 +10,6 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 /**
@@ -269,15 +268,18 @@ public class LecuturerInsert extends javax.swing.JFrame {
             String rank=jLabel10.getText();
             String sql = "INSERT INTO lecturernew(firstname,lastname,empid,faculty,building,center,department,level,rank)  VALUES('" + firstname.getText() + "','" + lastname.getText() + "','" + empid.getText() + "','" + facultyvalue + "','" + buildingValue + "','" + centervalue + "','" + department.getText() +"','"+levelvalue+ "' ,'" + rank + "'   )";
             
-            if(firstname.getText().isEmpty()){
+            if(firstname.getText().isEmpty() || lastname.getText().isEmpty() || empid.getText().isEmpty() || facultyvalue.isEmpty() || buildingValue.isEmpty() || buildingValue.isEmpty() || centervalue.isEmpty() || department.getText().isEmpty() || levelvalue.isEmpty() || rank.isEmpty() ){
                 String message="All Field Should be filled";
-                 
-            }
+                 JOptionPane.showMessageDialog(new JFrame(), message, "Dialog",
+                JOptionPane.ERROR_MESSAGE);
+            }else{
         
           
             Statement st=conn.createStatement();
             st.executeUpdate(sql);
+           
             JOptionPane.showMessageDialog(null,"Added Sucessfully");
+             }
         }catch(Exception e ){
             JOptionPane.showMessageDialog(null,"Invalid Input or cannot enter the same employee again");
         }

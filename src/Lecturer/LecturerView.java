@@ -29,75 +29,67 @@ public class LecturerView extends javax.swing.JFrame {
         show_user();
     }
 
-    public ArrayList<User>userList(){
-        ArrayList<User>userslist=new ArrayList<>();
-        
-         try{
+    public ArrayList<User> userList() {
+        ArrayList<User> userslist = new ArrayList<>();
+
+        try {
             Class.forName("com.mysql.jdbc.Driver");
 
-            Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/spm","root","");
-    
-            String query="select * from lecturernew";
-            Statement st=conn.createStatement();
-            
-            ResultSet rs=st.executeQuery(query);
-            
-            User user;
-            
-            while(rs.next()){
-                user=new User
-               (
-                  rs.getInt("empid"),
-                  rs.getString("firstname"),
-                  rs.getString("lastname"),
-                  rs.getString("faculty"),
-                  rs.getString("building"),
-                  rs.getString("center"),
-                  rs.getString("department"),
-                  rs.getString("level"),
-                  rs.getString("rank")
-         
-               );
-                
-                userslist.add(user);
-                
-            }
-            
-        }catch(Exception e ){
-            JOptionPane.showMessageDialog(null,e);
-        }
-         return userslist;
-         
-    }
-    
-    public void show_user(){
-        ArrayList<User> list=userList();
-        
-        
-     DefaultTableModel  model = (DefaultTableModel)jTable_display.getModel();
-    Object[] row =new Object[9];
-    for(int i =0;i<list.size();i++){
-        row[0]=list.get(i).getfirstname();
-        row[1]=list.get(i).getlastname();
-         row[2]=list.get(i).getempid();
-         row[3]=list.get(i).getfaculty();
-         row[4]=list.get(i).getbuilding();
-        row[5]=list.get(i).getcenter();
-          row[6]=list.get(i).getdepartment();
-         row[7]=list.get(i).getlevel();
-        row[8]=list.get(i).getrank();
-       
-         
-        model.addRow(row);
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/spm", "root", "");
 
-                
+            String query = "select * from lecturernew";
+            Statement st = conn.createStatement();
+
+            ResultSet rs = st.executeQuery(query);
+
+            User user;
+
+            while (rs.next()) {
+                user = new User(
+                        rs.getInt("empid"),
+                        rs.getString("firstname"),
+                        rs.getString("lastname"),
+                        rs.getString("faculty"),
+                        rs.getString("building"),
+                        rs.getString("center"),
+                        rs.getString("department"),
+                        rs.getString("level"),
+                        rs.getString("rank")
+                );
+
+                userslist.add(user);
+
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return userslist;
+
     }
-      
-    
-    
-    
-    
-}
+
+    public void show_user() {
+        ArrayList<User> list = userList();
+
+        DefaultTableModel model = (DefaultTableModel) jTable_display.getModel();
+        Object[] row = new Object[9];
+        for (int i = 0; i < list.size(); i++) {
+            row[0] = list.get(i).getfirstname();
+            row[1] = list.get(i).getlastname();
+            row[2] = list.get(i).getempid();
+            row[3] = list.get(i).getfaculty();
+            row[4] = list.get(i).getbuilding();
+            row[5] = list.get(i).getcenter();
+            row[6] = list.get(i).getdepartment();
+            row[7] = list.get(i).getlevel();
+            row[8] = list.get(i).getrank();
+
+            model.addRow(row);
+
+        }
+
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -337,184 +329,166 @@ public class LecturerView extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        
-         
-        try{
+
+        try {
             Class.forName("com.mysql.jdbc.Driver");
 
-            Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/spm","root","");
-            
-            int row =jTable_display.getSelectedRow();
-            String value=(jTable_display.getModel().getValueAt(row,2).toString());
-            String query="UPDATE lecturernew SET firstname=?,lastname=?,faculty=?,building=?,center=?,department=?,level=?,rank=? where empid="+value;
-            
-            String facultyvalue=faculty.getSelectedItem().toString();
-              String centervalue=center.getSelectedItem().toString();
-                  String levelvalue=level.getSelectedItem().toString();
-            
-        if (levelvalue == "Professor") {
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/spm", "root", "");
 
-            levelvalue = "1";
-        }
-        else if (levelvalue == "Assistant Professor") {
-            levelvalue = "2";
-        }
-        else if (levelvalue == "Senior Lecturer(HG)") {
-            levelvalue = "3";
-        }
-        else if (levelvalue == "Senior Lecturer") {
-            levelvalue = "4";
-        }
-        else if (levelvalue == "Lecturer") {
-            levelvalue = "6";
-        }
-        else if (levelvalue == "Instructor") {
-            levelvalue = "5";
-        }
-        else if (levelvalue == "Assistant Instructor") {
-            levelvalue = "7";
-        }
-        
-               jLabel10.setText(levelvalue+"."+empid.getText());               
+            int row = jTable_display.getSelectedRow();
+            String value = (jTable_display.getModel().getValueAt(row, 2).toString());
+            String query = "UPDATE lecturernew SET firstname=?,lastname=?,faculty=?,building=?,center=?,department=?,level=?,rank=? where empid=" + value;
 
-String rank=jLabel10.getText();
-            
-                  
-          
+            String facultyvalue = faculty.getSelectedItem().toString();
+            String centervalue = center.getSelectedItem().toString();
+            String levelvalue = level.getSelectedItem().toString();
+
+            if (levelvalue == "Professor") {
+
+                levelvalue = "1";
+            } else if (levelvalue == "Assistant Professor") {
+                levelvalue = "2";
+            } else if (levelvalue == "Senior Lecturer(HG)") {
+                levelvalue = "3";
+            } else if (levelvalue == "Senior Lecturer") {
+                levelvalue = "4";
+            } else if (levelvalue == "Lecturer") {
+                levelvalue = "6";
+            } else if (levelvalue == "Instructor") {
+                levelvalue = "5";
+            } else if (levelvalue == "Assistant Instructor") {
+                levelvalue = "7";
+            }
+
+            jLabel10.setText(levelvalue + "." + empid.getText());
+
+            String rank = jLabel10.getText();
+
             System.out.println(firstname.getText());
-          PreparedStatement pst=conn.prepareStatement(query);
-          pst.setString(1, firstname.getText());
-           pst.setString(2, lastname.getText());
-            pst.setString(3,facultyvalue );
-             pst.setString(4, building.getText());
+            PreparedStatement pst = conn.prepareStatement(query);
+            pst.setString(1, firstname.getText());
+            pst.setString(2, lastname.getText());
+            pst.setString(3, facultyvalue);
+            pst.setString(4, building.getText());
             pst.setString(5, centervalue);
             pst.setString(6, department.getText());
             pst.setString(7, levelvalue);
-             pst.setString(8, rank);
-            
-             pst.executeUpdate();
-            DefaultTableModel model=(DefaultTableModel)jTable_display.getModel();
+            pst.setString(8, rank);
+
+            pst.executeUpdate();
+            DefaultTableModel model = (DefaultTableModel) jTable_display.getModel();
             model.setRowCount(0);
-             show_user();
-                            
- JOptionPane.showMessageDialog(null,"Updated Sucessfully");
-            
-        }catch(Exception e ){
-            JOptionPane.showMessageDialog(null,"Invalid Input");
+            show_user();
+
+            JOptionPane.showMessageDialog(null, "Updated Sucessfully");
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Invalid Input");
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTable_displayMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_displayMouseClicked
         // TODO add your handling code here:
-        
-        
-                int i=jTable_display.getSelectedRow();
-                 DefaultTableModel  model = (DefaultTableModel)jTable_display.getModel();
-        
-                    firstname.setText(model.getValueAt(i, 0).toString());
-                 lastname.setText(model.getValueAt(i, 1).toString());
-                  department.setText(model.getValueAt(i, 6).toString());
-                        building.setText(model.getValueAt(i, 4).toString());  
-                        
-                        
-                        String facultyval=model.getValueAt(i,3).toString();
-                         switch(facultyval){
-                             case "Computing":
-                                 faculty.setSelectedIndex(0);
-                                 break;
-                             case "Business":
-                                 faculty.setSelectedIndex(1);
-                                 break;
-                                  case "Engineering":
-                                 faculty.setSelectedIndex(2);
-                                 break;
-                                   case "Humanities & Sciences":
-                                 faculty.setSelectedIndex(3);
-                                 break;
-                              
-                                 
-                         }
-                         
-                         String centerval=model.getValueAt(i,5).toString();
-                         switch(centerval){
-                             case "Malabe":
-                                 center.setSelectedIndex(0);
-                                 break;
-                             case "Metro":
-                                 center.setSelectedIndex(1);
-                                 break;
-                                
-                                  case "Matara":
-                                 center.setSelectedIndex(2);
-                                 break;
-                                   case "Kandy":
-                                 center.setSelectedIndex(3);
-                                 break;
-                                  case "Kurunagala":
-                                 center.setSelectedIndex(4);
-                                 break;
-                                 
-                                   case "Jaffna":
-                                 center.setSelectedIndex(5);
-                                 break;
-                              
-                                 
-                         }
-                         
-                         String professorVal=model.getValueAt(i,7).toString();
-                         switch(professorVal){
-                           
-                             case "1":
-                                 level.setSelectedIndex(0);
-                                 break;
-                             case "2":
-                                 level.setSelectedIndex(1);
-                                 break;
-                                
-                                  case "Senior Lecturer(HG)":
-                                 level.setSelectedIndex(2);
-                                 break;
-                                   case " Senior Lecturer":
-                                 level.setSelectedIndex(3);
-                                 break;
-                                  case "Lecutuer":
-                                 level.setSelectedIndex(4);
-                                 break;
-                                 
-                                   case "Instructor":
-                                 level.setSelectedIndex(5);
-                                 break;
-                                  case "Assitant Instructor":
-                                 level.setSelectedIndex(6);
-                                 break;
-                                 
-                              
-                                 
-                         }
-                        
-        
+
+        int i = jTable_display.getSelectedRow();
+        DefaultTableModel model = (DefaultTableModel) jTable_display.getModel();
+
+        firstname.setText(model.getValueAt(i, 0).toString());
+
+        String facultyval = model.getValueAt(i, 3).toString();
+        switch (facultyval) {
+            case "Computing":
+                faculty.setSelectedIndex(0);
+                break;
+            case "Business":
+                faculty.setSelectedIndex(1);
+                break;
+            case "Engineering":
+                faculty.setSelectedIndex(2);
+                break;
+            case "Humanities & Sciences":
+                faculty.setSelectedIndex(3);
+                break;
+
+        }
+
+        String centerval = model.getValueAt(i, 5).toString();
+        switch (centerval) {
+            case "Malabe":
+                center.setSelectedIndex(0);
+                break;
+            case "Metro":
+                center.setSelectedIndex(1);
+                break;
+
+            case "Matara":
+                center.setSelectedIndex(2);
+                break;
+            case "Kandy":
+                center.setSelectedIndex(3);
+                break;
+            case "Kurunagala":
+                center.setSelectedIndex(4);
+                break;
+
+            case "Jaffna":
+                center.setSelectedIndex(5);
+                break;
+
+        }
+
+        String professorVal = model.getValueAt(i, 7).toString();
+        switch (professorVal) {
+
+            case "1":
+                level.setSelectedIndex(0);
+                break;
+            case "2":
+                level.setSelectedIndex(1);
+                break;
+
+            case "Senior Lecturer(HG)":
+                level.setSelectedIndex(2);
+                break;
+            case " Senior Lecturer":
+                level.setSelectedIndex(3);
+                break;
+            case "Lecutuer":
+                level.setSelectedIndex(4);
+                break;
+
+            case "Instructor":
+                level.setSelectedIndex(5);
+                break;
+            case "Assitant Instructor":
+                level.setSelectedIndex(6);
+                break;
+
+        }
+
+
     }//GEN-LAST:event_jTable_displayMouseClicked
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        
-         try{
-           Class.forName("com.mysql.jdbc.Driver");
 
-            Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/spm","root","");
-           int row=jTable_display.getSelectedRow();
-           String value=(jTable_display.getModel().getValueAt(row, 2).toString());
-           String query="delete from lecturernew where empid="+value;
-           PreparedStatement pst=conn.prepareStatement(query);
-           pst.executeUpdate();
-           DefaultTableModel model=(DefaultTableModel)jTable_display.getModel();
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/spm", "root", "");
+            int row = jTable_display.getSelectedRow();
+            String value = (jTable_display.getModel().getValueAt(row, 2).toString());
+            String query = "delete from lecturernew where empid=" + value;
+            PreparedStatement pst = conn.prepareStatement(query);
+            pst.executeUpdate();
+            DefaultTableModel model = (DefaultTableModel) jTable_display.getModel();
             model.setRowCount(0);
-           show_user();
-            JOptionPane.showMessageDialog(null,"Deleted");
-           
-         }catch(Exception e){
-             JOptionPane.showMessageDialog(null,e);
-         }
+            show_user();
+            JOptionPane.showMessageDialog(null, "Deleted");
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void empidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_empidActionPerformed

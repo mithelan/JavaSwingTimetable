@@ -36,7 +36,7 @@ public class grpidgenerate extends javax.swing.JFrame {
      try{
            Class.forName("com.mysql.jdbc.Driver");
            
-           Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3307/SPM","root","Vithu719@");
+           Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/SPM","root","");
           String query="select * from grpidgen";
           Statement st=conn.createStatement();
           ResultSet rs=st.executeQuery(query);
@@ -230,7 +230,7 @@ public void showgeneration(){
          try{
            Class.forName("com.mysql.jdbc.Driver");
            
-           Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3307/SPM","root","Vithu719@");
+           Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/SPM","root","");
            
             String query="insert into grpidgen (grpidg) values (?)";
             PreparedStatement pst=conn.prepareStatement(query);
@@ -273,7 +273,7 @@ public void showgeneration(){
         try{
            Class.forName("com.mysql.jdbc.Driver");
            
-           Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3307/SPM","root","Vithu719@");
+           Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/SPM","root","");
            int row=generation.getSelectedRow();
            String value=(generation.getModel().getValueAt(row, 0).toString());
            String query="delete from grpidgen where id="+value;

@@ -6,6 +6,7 @@
 package Session;
 
 import com.mysql.jdbc.PreparedStatement;
+import java.awt.TextArea;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -33,6 +34,9 @@ public class AddSession extends javax.swing.JFrame {
         LectureData();
         show_user();
         StateChange();
+        tagData1();
+       
+       
     }
 
     public ArrayList<Session> GList() {
@@ -53,9 +57,7 @@ public class AddSession extends javax.swing.JFrame {
             while (rs.next()) {
                 user = new Session(
                         rs.getString("lecturer1"),
-                        rs.getString("lecturer2"),
-                        rs.getString("lecturer3"),
-                        rs.getString("lecturer4"),
+                       
                         rs.getString("tag"),
                         rs.getString("studentGroup"),
                         rs.getString("subject"),
@@ -83,15 +85,13 @@ public class AddSession extends javax.swing.JFrame {
         for (int i = 0; i < list.size(); i++) {
 
             row[0] = list.get(i).getlecturer1();
-            row[1] = list.get(i).getlecturer2();
-            row[2] = list.get(i).getlecturer3();
-            row[3] = list.get(i).getlecturer4();
-            row[4] = list.get(i).gettag();
-            row[5] = list.get(i).getstudentGroup();
-            row[6] = list.get(i).getsubject();
-            row[7] = list.get(i).getno_of_students();
-            row[8] = list.get(i).getsubgroup();
-            row[9] = list.get(i).getsessionDuration();
+         
+            row[1] = list.get(i).gettag();
+            row[2] = list.get(i).getstudentGroup();
+            row[3] = list.get(i).getsubject();
+            row[4] = list.get(i).getno_of_students();
+            row[5] = list.get(i).getsubgroup();
+            row[6] = list.get(i).getsessionDuration();
 
             model.addRow(row);
             sessionTable.setRowHeight(1, 15);
@@ -99,6 +99,43 @@ public class AddSession extends javax.swing.JFrame {
         }
 
     }
+    
+    
+     public ArrayList<LectureOnly> LList() {
+        ArrayList<LectureOnly> LList = new ArrayList<>();
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/spm", "root", "");
+
+            String query = "select firstname,lastname from lecturernew";
+            Statement st = conn.createStatement();
+
+            ResultSet rs = st.executeQuery(query);
+
+            LectureOnly user;
+
+            while (rs.next()) {
+                user = new LectureOnly(
+                             
+                        rs.getString("firstname"),
+                        rs.getString("lastname")
+                       
+                );
+
+                LList.add(user);
+
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return LList;
+
+    }
+     
+       
 
     public void LectureData() {
 
@@ -124,16 +161,17 @@ public class AddSession extends javax.swing.JFrame {
         }
     }
 
+
     public void studentGroupData() {
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/spm", "root", "");
             Statement st = conn.createStatement();
-            String selectQuery = "select groupid from groupid";
+            String selectQuery = "select grpidg from grpidgen";
             ResultSet rs = st.executeQuery(selectQuery);
             while (rs.next()) {
-                groupidCombo.addItem(rs.getString("groupid"));
+                groupidCombo.addItem(rs.getString("grpidg"));
             }
 
         } catch (Exception e) {
@@ -147,10 +185,10 @@ public class AddSession extends javax.swing.JFrame {
             Class.forName("com.mysql.jdbc.Driver");
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/spm", "root", "");
             Statement st = conn.createStatement();
-            String selectQuery = "select subgrpid from subgroup";
+            String selectQuery = "select subgrpidg from subgrpidgen";
             ResultSet rs = st.executeQuery(selectQuery);
             while (rs.next()) {
-                sgroupCombo.addItem(rs.getString("subgrpid"));
+                sgroupCombo.addItem(rs.getString("subgrpidg"));
             }
 
         } catch (Exception e) {
@@ -168,6 +206,23 @@ public class AddSession extends javax.swing.JFrame {
             ResultSet rs = st.executeQuery(selectQuery);
             while (rs.next()) {
                 tagCombo.addItem(rs.getString("tag"));
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+    
+     public void tagData1() {
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/spm", "root", "");
+            Statement st = conn.createStatement();
+            String selectQuery = "select tag from tags";
+            ResultSet rs = st.executeQuery(selectQuery);
+            while (rs.next()) {
+                searchTag.addItem(rs.getString("tag"));
             }
 
         } catch (Exception e) {
@@ -203,6 +258,8 @@ public class AddSession extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         lecCombo1 = new javax.swing.JComboBox<>();
         lecCombo2 = new javax.swing.JComboBox<>();
         lecCombo4 = new javax.swing.JComboBox<>();
@@ -226,11 +283,28 @@ public class AddSession extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         sessionTable = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
-        btn = new java.awt.Button();
-        jLabel10 = new javax.swing.JLabel();
         lectureCount = new javax.swing.JComboBox<>();
         label1 = new java.awt.Label();
         lecCombo3 = new javax.swing.JComboBox<>();
+        searchField = new javax.swing.JTextField();
+        searchTag = new javax.swing.JComboBox<>();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        searchLectu = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane4.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -350,20 +424,29 @@ public class AddSession extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Lecture 1", "Lecture 2", "Lecture 3", "Lecture 4", "Tag", "Student Group", "Subject", "Students Number", "Sub grp", "Session Duration"
+                "Lecturers", "Tag", "Student Group", "Subject", "Students Number", "Sub grp", "Session Duration"
             }
         ));
         sessionTable.setColumnSelectionAllowed(true);
         jScrollPane1.setViewportView(sessionTable);
         sessionTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-
-        btn.setActionCommand("Generate");
-        btn.setLabel("Generate");
-        btn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnActionPerformed(evt);
-            }
-        });
+        if (sessionTable.getColumnModel().getColumnCount() > 0) {
+            sessionTable.getColumnModel().getColumn(0).setMinWidth(500);
+            sessionTable.getColumnModel().getColumn(0).setPreferredWidth(500);
+            sessionTable.getColumnModel().getColumn(0).setMaxWidth(500);
+            sessionTable.getColumnModel().getColumn(1).setMinWidth(75);
+            sessionTable.getColumnModel().getColumn(1).setPreferredWidth(75);
+            sessionTable.getColumnModel().getColumn(1).setMaxWidth(75);
+            sessionTable.getColumnModel().getColumn(2).setMinWidth(75);
+            sessionTable.getColumnModel().getColumn(2).setPreferredWidth(75);
+            sessionTable.getColumnModel().getColumn(2).setMaxWidth(75);
+            sessionTable.getColumnModel().getColumn(3).setMinWidth(75);
+            sessionTable.getColumnModel().getColumn(3).setPreferredWidth(75);
+            sessionTable.getColumnModel().getColumn(3).setMaxWidth(75);
+            sessionTable.getColumnModel().getColumn(4).setMinWidth(75);
+            sessionTable.getColumnModel().getColumn(4).setPreferredWidth(75);
+            sessionTable.getColumnModel().getColumn(4).setMaxWidth(75);
+        }
 
         lectureCount.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4" }));
         lectureCount.addItemListener(new java.awt.event.ItemListener() {
@@ -382,6 +465,41 @@ public class AddSession extends javax.swing.JFrame {
 
         lecCombo3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-" }));
 
+        searchField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchFieldActionPerformed(evt);
+            }
+        });
+        searchField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                searchFieldKeyReleased(evt);
+            }
+        });
+
+        searchTag.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All" }));
+        searchTag.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchTagActionPerformed(evt);
+            }
+        });
+
+        jLabel10.setText("Sort By:");
+
+        jLabel11.setText("Group ID :");
+
+        searchLectu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchLectuActionPerformed(evt);
+            }
+        });
+        searchLectu.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                searchLectuKeyReleased(evt);
+            }
+        });
+
+        jLabel12.setText("Search :");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -391,26 +509,38 @@ public class AddSession extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(419, 431, Short.MAX_VALUE)
-                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(505, 505, 505))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(40, 40, 40)
+                                .addComponent(jLabel1)
+                                .addGap(18, 18, 18)
+                                .addComponent(lecCombo1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(26, 26, 26)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lecCombo3, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lecCombo2, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(40, 40, 40)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGap(56, 56, 56)
+                                        .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(22, 22, 22)
+                                        .addComponent(lectureCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel7)
                                             .addGroup(layout.createSequentialGroup()
-                                                .addGap(84, 84, 84)
-                                                .addComponent(lecCombo3, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(lecCombo4, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel1)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(lecCombo1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(lecCombo2, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                                .addGap(13, 13, 13)
+                                                .addComponent(jLabel5)))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(session, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(numberStudents, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(subjectCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(12, 12, 12)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -419,47 +549,41 @@ public class AddSession extends javax.swing.JFrame {
                                                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
                                                     .addComponent(jLabel6)
                                                     .addComponent(jLabel4))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(subjectCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                        .addComponent(sgroupCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(groupidCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                    .addComponent(tagCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                .addGap(18, 18, 18)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                    .addComponent(tagCombo, 0, 117, Short.MAX_VALUE)
+                                                    .addComponent(groupidCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addComponent(sgroupCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                             .addGroup(layout.createSequentialGroup()
                                                 .addComponent(jLabel2)
-                                                .addGap(124, 124, 124))))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(51, 51, 51)
-                                                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(22, 22, 22)
-                                                .addComponent(lectureCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(jLabel7)
-                                                    .addGroup(layout.createSequentialGroup()
-                                                        .addGap(13, 13, 13)
-                                                        .addComponent(jLabel5)))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(numberStudents, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(session, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                            .addComponent(addRecord, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(54, 54, 54)
-                                        .addComponent(btn, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                                .addGap(124, 124, 124))
+                                            .addComponent(lecCombo4, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(441, 441, 441)
-                                .addComponent(jScrollPane1)
-                                .addGap(18, 18, 18)))
-                        .addContainerGap())
+                                .addGap(6, 6, 6)
+                                .addComponent(jLabel12)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(searchLectu, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(277, 277, 277)
+                                .addComponent(jLabel10)
+                                .addGap(18, 18, 18)
+                                .addComponent(searchTag, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(22, 22, 22)
+                                .addComponent(jLabel11)
+                                .addGap(18, 18, 18)
+                                .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 920, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(62, 62, 62))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(373, 373, 373)
-                        .addComponent(jLabel9)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(373, 373, 373)
+                                .addComponent(jLabel9))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(241, 241, 241)
+                                .addComponent(addRecord, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -467,23 +591,12 @@ public class AddSession extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lectureCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(64, 64, 64)))
-                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lectureCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(38, 38, 38)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lecCombo1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1)
@@ -508,19 +621,28 @@ public class AddSession extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
                             .addComponent(subjectCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                        .addGap(28, 28, 28)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(session, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(12, 12, 12)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(numberStudents, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(25, 25, 25)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(addRecord, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(25, 25, 25))))
+                            .addComponent(numberStudents, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(53, 53, 53)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(searchTag, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel11)
+                            .addComponent(searchLectu)
+                            .addComponent(jLabel12))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(addRecord, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16))
         );
 
         pack();
@@ -582,13 +704,15 @@ public class AddSession extends javax.swing.JFrame {
             String lectureValue2 = lecCombo2.getSelectedItem().toString();
             String lectureValue3 = lecCombo3.getSelectedItem().toString();
             String lectureValue4 = lecCombo4.getSelectedItem().toString();
+            String TotalLec=lectureValue1+lectureValue2+lectureValue3+lectureValue4;
             String tagValue = tagCombo.getSelectedItem().toString();
             String studentGroupValue = groupidCombo.getSelectedItem().toString();
             String subjectValue = subjectCombo.getSelectedItem().toString();
             String subGroupValue = sgroupCombo.getSelectedItem().toString();
+            
 
-            //String GenerateSession=lectureValue1 +"\n"+lectureValue2+lectureValue3+lectureValue4+"\n"+subjectValue+"\n"+tagValue+"\n"+studentGroupValue+"."+subGroupValue+numberStudents.getText()+"("+sessionValue+")";
-            String sql = "INSERT INTO session(lecturer1,lecturer2,lecturer3,lecturer4,tag,studentGroup,subject,no_of_students,subgroup,sessionDuration)  VALUES('" + lectureValue1 + "','" + lectureValue2 + "','" + lectureValue3 + "','" + lectureValue4 + "','" + tagValue + "','" + studentGroupValue + "','" + subjectValue + "','" + numberStudents.getText() + "' ,'" + subGroupValue + "' ,'" + sessionValue + "'  )";
+            String GenerateSession=lectureValue1 +"\n"+lectureValue2+lectureValue3+lectureValue4+"\n"+subjectValue+"\n"+tagValue+"\n"+studentGroupValue+"."+subGroupValue+numberStudents.getText()+"("+sessionValue+")";
+            String sql = "INSERT INTO session(lecturer1,tag,studentGroup,subject,no_of_students,subgroup,sessionDuration,sessionTot)  VALUES('" + TotalLec + "','" + tagValue + "','" + studentGroupValue + "','" + subjectValue + "','" + numberStudents.getText() + "' ,'" + subGroupValue + "' ,'" + sessionValue+ "' ,'"+GenerateSession+"'  )";
             Statement st = conn.createStatement();
             st.executeUpdate(sql);
 
@@ -598,6 +722,7 @@ public class AddSession extends javax.swing.JFrame {
 
             show_user();
         } catch (Exception e) {
+            System.out.println(e);
 
         }
     }//GEN-LAST:event_addRecordActionPerformed
@@ -605,36 +730,6 @@ public class AddSession extends javax.swing.JFrame {
     private void subjectComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subjectComboActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_subjectComboActionPerformed
-
-    private void btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActionPerformed
-        // TODO add your handling code here:
-
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/spm", "root", "");
-
-            String sessionValue = session.getSelectedItem().toString();
-            String lectureValue1 = lecCombo1.getSelectedItem().toString();
-            String lectureValue2 = lecCombo2.getSelectedItem().toString();
-            String lectureValue3 = lecCombo3.getSelectedItem().toString();
-            String lectureValue4 = lecCombo4.getSelectedItem().toString();
-            String tagValue = tagCombo.getSelectedItem().toString();
-            String studentGroupValue = groupidCombo.getSelectedItem().toString();
-            String subjectValue = subjectCombo.getSelectedItem().toString();
-            String subGroupValue = sgroupCombo.getSelectedItem().toString();
-
-            String GenerateSession = lectureValue1 + "\n" + lectureValue2 + lectureValue3 + lectureValue4 + "\n" + subjectValue + "\n" + tagValue + "\n" + studentGroupValue + "." + subGroupValue + numberStudents.getText() + "(" + sessionValue + ")";
-            String sql = "INSERT INTO newsession(GenerateSession) VALUES('" + GenerateSession + "' )";
-
-            Statement st = conn.createStatement();
-            st.executeUpdate(sql);
-
-            JOptionPane.showMessageDialog(null, "Generated");
-        } catch (Exception e) {
-
-        }
-    }//GEN-LAST:event_btnActionPerformed
 
     private void sgroupComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sgroupComboActionPerformed
         // TODO add your handling code here:
@@ -688,6 +783,215 @@ public class AddSession extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_groupidComboActionPerformed
 
+    private void searchFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchFieldKeyReleased
+        // TODO add your handling code here:
+        
+           try {
+            String search_word = searchField.getText();
+            System.out.println(search_word);
+            int word_length = search_word.length();
+            if(word_length > 0) {
+                Class.forName("com.mysql.jdbc.Driver");
+                Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/spm","root","");
+                String sql = "SELECT * FROM session where studentGroup LIKE '"+search_word+"%' ";
+                PreparedStatement pstmt = (PreparedStatement) conn.prepareStatement(sql);
+                ResultSet rs = pstmt.executeQuery();
+                DefaultTableModel building_table = (DefaultTableModel) sessionTable.getModel();
+                building_table.setRowCount(0);
+
+                while(rs.next())
+                {
+                    Object o[] = {rs.getString("lecturer1")
+                    , rs.getString("tag"), rs.getString("studentGroup")
+                            , rs.getString("subject"), rs.getString("no_of_students")
+                            , rs.getString("subgroup"), rs.getString("sessionDuration")
+                    };
+                    building_table.addRow(o);
+                }
+                
+                
+             
+            }else{
+                  System.out.println("Yes this is workinh");
+                Class.forName("com.mysql.jdbc.Driver");
+                Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/spm","root","");
+                String sql = "SELECT * FROM session";
+                PreparedStatement pstmt = (PreparedStatement) conn.prepareStatement(sql);
+                ResultSet rs = pstmt.executeQuery();
+                DefaultTableModel building_table = (DefaultTableModel) sessionTable.getModel();
+                building_table.setRowCount(0);
+
+                while(rs.next())
+                {
+                    Object o[] = {rs.getString("lecturer1")
+                    , rs.getString("tag"), rs.getString("studentGroup")
+                            , rs.getString("subject"), rs.getString("no_of_students")
+                            , rs.getString("subgroup"), rs.getString("sessionDuration")
+                    };
+                    building_table.addRow(o);
+                }
+                
+               
+                
+            } 
+
+            
+        }
+        catch(Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_searchFieldKeyReleased
+
+    private void searchFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchFieldActionPerformed
+
+    private void searchTagActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchTagActionPerformed
+        // TODO add your handling code here:
+        
+           try {
+             String tagValue = searchTag.getSelectedItem().toString();
+            System.out.println(tagValue);
+            int word_length = tagValue.length();
+        
+            
+            
+            if(tagValue=="All"){
+               
+                  Class.forName("com.mysql.jdbc.Driver");
+                Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/spm","root","");
+                String sql = "SELECT * FROM session ";
+              
+                PreparedStatement pstmt = (PreparedStatement) conn.prepareStatement(sql);
+                ResultSet rs = pstmt.executeQuery();
+                DefaultTableModel building_table = (DefaultTableModel) sessionTable.getModel();
+                building_table.setRowCount(0);
+                  while(rs.next())
+                {
+                    Object o[] = {rs.getString("lecturer1")
+                    , rs.getString("tag"), rs.getString("studentGroup")
+                            , rs.getString("subject"), rs.getString("no_of_students")
+                            , rs.getString("subgroup"), rs.getString("sessionDuration")
+                    };
+                    building_table.addRow(o);
+                }
+            }else
+            if(word_length > 0) {
+                Class.forName("com.mysql.jdbc.Driver");
+                Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/spm","root","");
+                String sql = "SELECT * FROM session where tag= '"+tagValue+ "' ";
+                PreparedStatement pstmt = (PreparedStatement) conn.prepareStatement(sql);
+                ResultSet rs = pstmt.executeQuery();
+                DefaultTableModel building_table = (DefaultTableModel) sessionTable.getModel();
+                building_table.setRowCount(0);
+
+                while(rs.next())
+                {
+                    Object o[] = {rs.getString("lecturer1")
+                    , rs.getString("tag"), rs.getString("studentGroup")
+                            , rs.getString("subject"), rs.getString("no_of_students")
+                            , rs.getString("subgroup"), rs.getString("sessionDuration")
+                    };
+                    building_table.addRow(o);
+                }
+                
+                
+             
+            }else {
+                  System.out.println("Yes this is workinh");
+                Class.forName("com.mysql.jdbc.Driver");
+                Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/spm","root","");
+                String sql = "SELECT * FROM session";
+                PreparedStatement pstmt = (PreparedStatement) conn.prepareStatement(sql);
+                ResultSet rs = pstmt.executeQuery();
+                DefaultTableModel building_table = (DefaultTableModel) sessionTable.getModel();
+                building_table.setRowCount(0);
+
+                while(rs.next())
+                {
+                    Object o[] = {rs.getString("lecturer1")
+                    , rs.getString("tag"), rs.getString("studentGroup")
+                            , rs.getString("subject"), rs.getString("no_of_students")
+                            , rs.getString("subgroup"), rs.getString("sessionDuration")
+                    };
+                    building_table.addRow(o);
+                }
+                
+               
+                
+            } 
+
+            
+        }
+        catch(Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        
+        
+    }//GEN-LAST:event_searchTagActionPerformed
+
+    private void searchLectuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchLectuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchLectuActionPerformed
+
+    private void searchLectuKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchLectuKeyReleased
+       
+            try {
+            String search_word = searchLectu.getText();
+            System.out.println(search_word);
+            int word_length = search_word.length();
+            if(word_length > 0) {
+                Class.forName("com.mysql.jdbc.Driver");
+                Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/spm","root","");
+                String sql = "SELECT * FROM session where lecturer1 LIKE '%"+search_word+"%' ";
+                PreparedStatement pstmt = (PreparedStatement) conn.prepareStatement(sql);
+                ResultSet rs = pstmt.executeQuery();
+                DefaultTableModel building_table = (DefaultTableModel) sessionTable.getModel();
+                building_table.setRowCount(0);
+
+                 while(rs.next())
+                {
+                    Object o[] = {rs.getString("lecturer1")
+                    , rs.getString("tag"), rs.getString("studentGroup")
+                            , rs.getString("subject"), rs.getString("no_of_students")
+                            , rs.getString("subgroup"), rs.getString("sessionDuration")
+                    };
+                    building_table.addRow(o);
+                }
+                
+                
+               
+            } else {
+                System.out.println("Yes this is workinh");
+                Class.forName("com.mysql.jdbc.Driver");
+                Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/spm","root","");
+                String sql = "SELECT * FROM session";
+                PreparedStatement pstmt = (PreparedStatement) conn.prepareStatement(sql);
+                ResultSet rs = pstmt.executeQuery();
+                DefaultTableModel building_table = (DefaultTableModel) sessionTable.getModel();
+                building_table.setRowCount(0);
+
+                  while(rs.next())
+                {
+                    Object o[] = {rs.getString("lecturer1")
+                    , rs.getString("tag"), rs.getString("studentGroup")
+                            , rs.getString("subject"), rs.getString("no_of_students")
+                            , rs.getString("subgroup"), rs.getString("sessionDuration")
+                    };
+                    building_table.addRow(o);
+                }
+                
+               
+                
+            }
+//            buildings_table.setModel(DbUtils.resultSetToTableModel(rs));
+            
+        }
+        catch(Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_searchLectuKeyReleased
+
     private void StateChange() {
         lecCombo1.setVisible(true);
         lecCombo2.setVisible(false);
@@ -734,11 +1038,12 @@ public class AddSession extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addRecord;
-    private java.awt.Button btn;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> groupidCombo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -750,6 +1055,8 @@ public class AddSession extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JTable jTable1;
     private java.awt.Label label1;
     private javax.swing.JComboBox<String> lecCombo1;
     private javax.swing.JComboBox<String> lecCombo2;
@@ -757,6 +1064,9 @@ public class AddSession extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> lecCombo4;
     private javax.swing.JComboBox<String> lectureCount;
     private javax.swing.JTextField numberStudents;
+    private javax.swing.JTextField searchField;
+    private javax.swing.JTextField searchLectu;
+    private javax.swing.JComboBox<String> searchTag;
     private javax.swing.JComboBox<String> session;
     private javax.swing.JTable sessionTable;
     private javax.swing.JComboBox<String> sgroupCombo;
