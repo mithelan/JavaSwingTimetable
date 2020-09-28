@@ -37,7 +37,7 @@ public class Group extends javax.swing.JFrame {
      try{
            Class.forName("com.mysql.jdbc.Driver");
            
-           Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/SPM","root","");
+         Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
           String query="select * from groupid";
           Statement st=conn.createStatement();
           ResultSet rs=st.executeQuery(query);
@@ -241,7 +241,7 @@ public class Group extends javax.swing.JFrame {
          try{
            Class.forName("com.mysql.jdbc.Driver");
            
-           Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/SPM","root","");
+           Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
             String query="insert into groupid (groupid) values (?)";
             PreparedStatement pst=conn.prepareStatement(query);
             pst.setString(1, groupid.getText());
@@ -278,7 +278,7 @@ public class Group extends javax.swing.JFrame {
          try{
            Class.forName("com.mysql.jdbc.Driver");
            
-           Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/SPM","root","");
+          Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
            int row=grouptable.getSelectedRow();
            String value=(grouptable.getModel().getValueAt(row, 0).toString());
            String query="delete from groupid where id="+value;
@@ -302,7 +302,7 @@ public class Group extends javax.swing.JFrame {
          try{
            Class.forName("com.mysql.jdbc.Driver");
            
-           Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/SPM","root","");
+      Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
            int row=grouptable.getSelectedRow();
            String value=(grouptable.getModel().getValueAt(row, 0).toString());
            String query="UPDATE groupid SET groupid=? where id="+value;

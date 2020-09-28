@@ -12,6 +12,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -33,7 +34,7 @@ public class AddSession extends javax.swing.JFrame {
         studentGroupData();
         LectureData();
         show_user();
-        StateChange();
+    
         tagData1();
        
        
@@ -265,7 +266,6 @@ public class AddSession extends javax.swing.JFrame {
         lecCombo4 = new javax.swing.JComboBox<>();
         tagCombo = new javax.swing.JComboBox<>();
         groupidCombo = new javax.swing.JComboBox<>();
-        numberStudents = new javax.swing.JTextField();
         sgroupCombo = new javax.swing.JComboBox<>();
         session = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
@@ -283,8 +283,6 @@ public class AddSession extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         sessionTable = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
-        lectureCount = new javax.swing.JComboBox<>();
-        label1 = new java.awt.Label();
         lecCombo3 = new javax.swing.JComboBox<>();
         searchField = new javax.swing.JTextField();
         searchTag = new javax.swing.JComboBox<>();
@@ -292,6 +290,7 @@ public class AddSession extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         searchLectu = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
+        numberStudents = new javax.swing.JTextField();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -340,12 +339,6 @@ public class AddSession extends javax.swing.JFrame {
         groupidCombo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 groupidComboActionPerformed(evt);
-            }
-        });
-
-        numberStudents.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                numberStudentsActionPerformed(evt);
             }
         });
 
@@ -453,21 +446,6 @@ public class AddSession extends javax.swing.JFrame {
             sessionTable.getColumnModel().getColumn(4).setMaxWidth(75);
         }
 
-        lectureCount.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4" }));
-        lectureCount.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                lectureCountItemStateChanged(evt);
-            }
-        });
-        lectureCount.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                lectureCountActionPerformed(evt);
-            }
-        });
-
-        label1.setName("lec"); // NOI18N
-        label1.setText("Number of Lecturers");
-
         lecCombo3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-" }));
 
         searchField.addActionListener(new java.awt.event.ActionListener() {
@@ -505,6 +483,15 @@ public class AddSession extends javax.swing.JFrame {
 
         jLabel12.setText("Search :");
 
+        numberStudents.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                numberStudentsKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                numberStudentsKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -518,52 +505,46 @@ public class AddSession extends javax.swing.JFrame {
                                 .addGap(40, 40, 40)
                                 .addComponent(jLabel1)
                                 .addGap(18, 18, 18)
-                                .addComponent(lecCombo1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(26, 26, 26)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lecCombo3, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lecCombo2, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))))
+                                .addComponent(lecCombo1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel7)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(56, 56, 56)
-                                        .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(22, 22, 22)
-                                        .addComponent(lectureCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(13, 13, 13)
+                                        .addComponent(jLabel5)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(subjectCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(numberStudents, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(session, javax.swing.GroupLayout.Alignment.LEADING, 0, 71, Short.MAX_VALUE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel7)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(13, 13, 13)
-                                                .addComponent(jLabel5)))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(session, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(numberStudents, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(subjectCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(jLabel2)
+                                        .addGap(124, 124, 124))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(12, 12, 12)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(jLabel6)
-                                                    .addComponent(jLabel4))
-                                                .addGap(18, 18, 18)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                    .addComponent(tagCombo, 0, 117, Short.MAX_VALUE)
-                                                    .addComponent(groupidCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                    .addComponent(sgroupCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel2)
-                                                .addGap(124, 124, 124))
-                                            .addComponent(lecCombo4, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel6)
+                                            .addComponent(jLabel4))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lecCombo3, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(tagCombo, 0, 117, Short.MAX_VALUE)
+                                                .addComponent(groupidCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(sgroupCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))))
+                        .addGap(21, 21, 21)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lecCombo4, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lecCombo2, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
@@ -594,22 +575,17 @@ public class AddSession extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lectureCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(38, 38, 38)
+                        .addGap(123, 123, 123)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lecCombo1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1)
                             .addComponent(lecCombo2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lecCombo4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lecCombo3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lecCombo3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lecCombo4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(tagCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -630,11 +606,14 @@ public class AddSession extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(session, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(12, 12, 12)
+                        .addGap(16, 16, 16)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(numberStudents, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(numberStudents, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(27, 27, 27))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(53, 53, 53)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(searchLectu, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -645,18 +624,14 @@ public class AddSession extends javax.swing.JFrame {
                                 .addComponent(jLabel11)
                                 .addComponent(jLabel12)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addComponent(addRecord, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void numberStudentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numberStudentsActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_numberStudentsActionPerformed
 
     private void sessionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sessionActionPerformed
         // TODO add your handling code here:
@@ -679,6 +654,7 @@ public class AddSession extends javax.swing.JFrame {
             jLabel6.setVisible(false);
             groupidCombo.setVisible(true);
             jLabel3.setVisible(true);
+            
 
         } else if (tagValue.equals(tute)) {
             sgroupCombo.setVisible(false);
@@ -717,15 +693,25 @@ public class AddSession extends javax.swing.JFrame {
             String subGroupValue = sgroupCombo.getSelectedItem().toString();
             
 
-            String GenerateSession=lectureValue1 +"\n"+lectureValue2+lectureValue3+lectureValue4+"\n"+subjectValue+"\n"+tagValue+"\n"+studentGroupValue+"."+subGroupValue+numberStudents.getText()+"("+sessionValue+")";
-            String sql = "INSERT INTO session(lecturer1,tag,studentGroup,subject,no_of_students,subgroup,sessionDuration,sessionTot)  VALUES('" + TotalLec + "','" + tagValue + "','" + studentGroupValue + "','" + subjectValue + "','" + numberStudents.getText() + "' ,'" + subGroupValue + "' ,'" + sessionValue+ "' ,'"+GenerateSession+"'  )";
+            String GenerateSession=lectureValue1 +"\n"+lectureValue2+lectureValue3+lectureValue4+"\n"+subjectValue+"\n"+tagValue+"\n"+studentGroupValue+"."+subGroupValue+numberStudents.getText().toString()+"("+sessionValue+")";
+            String sql = "INSERT INTO session(lecturer1,tag,studentGroup,subject,no_of_students,subgroup,sessionDuration,sessionTot)  VALUES('" + TotalLec + "','" + tagValue + "','" + studentGroupValue + "','" + subjectValue + "','" + numberStudents.getText().toString() + "' ,'" + subGroupValue + "' ,'" + sessionValue+ "' ,'"+GenerateSession+"'  )";
+            
+            
+            
+             if(lectureValue1.isEmpty() || subjectValue.isEmpty() || tagValue.isEmpty() || studentGroupValue.isEmpty() || subGroupValue.isEmpty() || numberStudents.getText().toString().isEmpty() || sessionValue.isEmpty()  ){
+                String message="All Field Should be filled";
+                 JOptionPane.showMessageDialog(new JFrame(), message, "Dialog",
+                JOptionPane.ERROR_MESSAGE);
+            }else{
+            
             Statement st = conn.createStatement();
             st.executeUpdate(sql);
 
             JOptionPane.showMessageDialog(null, "Added Sucessfully");
-            DefaultTableModel model = (DefaultTableModel) sessionTable.getModel();
+          
+             }
+               DefaultTableModel model = (DefaultTableModel) sessionTable.getModel();
             model.setRowCount(0);
-
             show_user();
         } catch (Exception e) {
             System.out.println(e);
@@ -744,46 +730,10 @@ public class AddSession extends javax.swing.JFrame {
     private void tagComboItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_tagComboItemStateChanged
         // TODO add your handling code here:
 
-        StateChange();
+
 
 
     }//GEN-LAST:event_tagComboItemStateChanged
-
-    private void lectureCountItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_lectureCountItemStateChanged
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_lectureCountItemStateChanged
-
-    private void lectureCountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lectureCountActionPerformed
-        // TODO add your handling code here:
-          String count = lectureCount.getSelectedItem().toString();
-        System.out.println(count);
-   
-
-        if (count=="1") {
-            lecCombo1.setVisible(true);
-            lecCombo2.setVisible(false);
-             lecCombo3.setVisible(false);
-             lecCombo4.setVisible(false);
-        }else if (count=="2") {
-            lecCombo1.setVisible(true);
-            lecCombo2.setVisible(true);
-             lecCombo3.setVisible(false);
-             lecCombo4.setVisible(false);
-           
-        }else if (count=="3") {
-            lecCombo1.setVisible(true);
-            lecCombo2.setVisible(true);
-             lecCombo3.setVisible(true);
-             lecCombo4.setVisible(false);
-            
-        }else if (count=="4") {
-            lecCombo1.setVisible(true);
-            lecCombo2.setVisible(true);
-             lecCombo3.setVisible(true);
-             lecCombo4.setVisible(true);
-        }
-    }//GEN-LAST:event_lectureCountActionPerformed
 
     private void groupidComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_groupidComboActionPerformed
         // TODO add your handling code here:
@@ -1002,14 +952,72 @@ public class AddSession extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_lecCombo1ActionPerformed
 
-    private void StateChange() {
-        lecCombo1.setVisible(true);
-        lecCombo2.setVisible(false);
-         lecCombo3.setVisible(false);
-        lecCombo4.setVisible(false);
+    private void numberStudentsKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_numberStudentsKeyPressed
+        // TODO add your handling code here:
+        
+         char c=evt.getKeyChar();
+     if(Character.isLetter(c)){
+         
+         numberStudents.setEditable(false);
+         
+     }else{
+         numberStudents.setEditable(true);
+     }
+        
+//         String a = numberStudents.getText().toString();
+//         System.out.println(a.length());
+//         char last = a.charAt(a.length());
+//         System.out.println(last);
+         
+//         String x = word[a.length()-1];
+         
+         
+         
+   
+         
+         
+        
+//         if(x.matches("^[a-zA-Z]+$")) {
+//             numberStudents.setEditable(false);
+//             
+//           
+//         } else {
+//                         numberStudents.setEditable(true);
+//             
+//         }
+         
+      
+    }//GEN-LAST:event_numberStudentsKeyPressed
 
+    private void numberStudentsKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_numberStudentsKeyReleased
+        // TODO add your handling code here:
+//          String a = numberStudents.getText().toString();
+//        
+       
+//  String a = numberStudents.getText().toString();
+//  String s = "";
+//         System.out.println(a.length());
+//         char last = a.charAt(a.length()-1);
+//         System.out.println(last + "tahnda");
+//         s = Character.toString(last);
+//          numberStudents.setEditable(true);
+//          try {
+//         if(s.matches("^[a-zA-Z]+$")) {
+//             numberStudents.setEditable(false);
+//             numberStudents.setText("");
+//         } else {
+//            numberStudents.setEditable(true);
+//             
+//         }
+//          } catch(Exception e){
+//              System.out.println("");
+//          }
 
-    }
+    
+          
+    }//GEN-LAST:event_numberStudentsKeyReleased
+
+   
 
     /**
      * @param args the command line arguments
@@ -1067,12 +1075,10 @@ public class AddSession extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTable1;
-    private java.awt.Label label1;
     private javax.swing.JComboBox<String> lecCombo1;
     private javax.swing.JComboBox<String> lecCombo2;
     private javax.swing.JComboBox<String> lecCombo3;
     private javax.swing.JComboBox<String> lecCombo4;
-    private javax.swing.JComboBox<String> lectureCount;
     private javax.swing.JTextField numberStudents;
     private javax.swing.JTextField searchField;
     private javax.swing.JTextField searchLectu;

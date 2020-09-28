@@ -5,6 +5,7 @@
  */
 package Session;
 
+import com.mysql.jdbc.PreparedStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -87,7 +88,6 @@ public class getSession extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
@@ -96,6 +96,9 @@ public class getSession extends javax.swing.JFrame {
         taglabel = new javax.swing.JLabel();
         groupIdLabel = new javax.swing.JLabel();
         numberStudents = new javax.swing.JLabel();
+        searchSession = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -181,34 +184,60 @@ public class getSession extends javax.swing.JFrame {
                 .addContainerGap(130, Short.MAX_VALUE))
         );
 
+        searchSession.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchSessionActionPerformed(evt);
+            }
+        });
+        searchSession.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                searchSessionKeyReleased(evt);
+            }
+        });
+
+        jLabel2.setText("Search :");
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel3.setText("Generated Session");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(123, 123, 123)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(searchSession, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(52, 52, 52)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(422, 422, 422)
+                        .addComponent(jLabel3)))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(108, 108, 108)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(36, 36, 36)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(searchSession, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -259,6 +288,66 @@ public class getSession extends javax.swing.JFrame {
                          
     }//GEN-LAST:event_tableMouseClicked
 
+    private void searchSessionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchSessionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchSessionActionPerformed
+
+    private void searchSessionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchSessionKeyReleased
+        try {
+            String search_word = searchSession.getText();
+            System.out.println(search_word);
+            int word_length = search_word.length();
+            if(word_length > 0) {
+                Class.forName("com.mysql.jdbc.Driver");
+                Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/spm","root","");
+                String sql = "SELECT * FROM session where id LIKE '"+search_word+"%' ";
+                PreparedStatement pstmt = (PreparedStatement) conn.prepareStatement(sql);
+                ResultSet rs = pstmt.executeQuery();
+                DefaultTableModel building_table = (DefaultTableModel) table.getModel();
+                building_table.setRowCount(0);
+
+                 while(rs.next())
+                {
+                    Object o[] = {rs.getString("id")
+                   
+                    };
+                    building_table.addRow(o);
+                }
+                
+                
+               
+            } else {
+                System.out.println("Yes this is workinh");
+                Class.forName("com.mysql.jdbc.Driver");
+                Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/spm","root","");
+                String sql = "SELECT * FROM session";
+                PreparedStatement pstmt = (PreparedStatement) conn.prepareStatement(sql);
+                ResultSet rs = pstmt.executeQuery();
+                DefaultTableModel building_table = (DefaultTableModel) table.getModel();
+                building_table.setRowCount(0);
+
+                  while(rs.next())
+                {
+                    Object o[] = {rs.getString("id")
+                   
+                    };
+                    building_table.addRow(o);
+                }
+                
+               
+                
+            }
+//            buildings_table.setModel(DbUtils.resultSetToTableModel(rs));
+            
+        }
+        catch(Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        
+        
+        
+    }//GEN-LAST:event_searchSessionKeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -296,13 +385,15 @@ public class getSession extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel groupIdLabel;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lecture;
     private javax.swing.JLabel numberStudents;
+    private javax.swing.JTextField searchSession;
     private javax.swing.JLabel subjectLabel;
     private javax.swing.JTable table;
     private javax.swing.JLabel taglabel;
