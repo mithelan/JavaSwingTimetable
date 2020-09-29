@@ -11,12 +11,12 @@ package Session;
  */
 class Session {
     
-
+private int id;
     private String lecturer1,lecturer2,lecturer3,lecturer4,tag,studentGroup,subject,no_of_students,subgroup,sessionDuration;
   
     
     public Session(String lecturer1,String tag
-    ,String studentGroup,String subject,String no_of_students,String subgroup,String sessionDuration ){
+    ,String studentGroup,String subject,String no_of_students,int id ){
         
        this.lecturer1=lecturer1;
       
@@ -24,8 +24,9 @@ class Session {
        this.studentGroup=studentGroup;
        this.subject=subject;
        this.no_of_students=no_of_students;
-       this.subgroup=subgroup;
-       this.sessionDuration=sessionDuration;
+       this.id=id;
+//       this.subgroup=subgroup;
+//       this.sessionDuration=sessionDuration;
     }
     
     public String getlecturer1(){
@@ -45,12 +46,17 @@ class Session {
             public String getno_of_students(){
         return no_of_students;
     }
-        public String  getsubgroup(){
-        return subgroup;
-    }  
-        public String getsessionDuration(){
-        return sessionDuration;
+                 public int getid(){
+        return id;
     }
+            
+            
+//        public String  getsubgroup(){
+//        return subgroup;
+//    }  
+//        public String getsessionDuration(){
+//        return sessionDuration;
+//    }
     
     
     
