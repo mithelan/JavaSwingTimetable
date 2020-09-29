@@ -13,6 +13,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -51,6 +52,7 @@ public class natsubui extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -75,6 +77,11 @@ public class natsubui extends javax.swing.JFrame {
                 "ID", "SubGroup", "Day", "Time"
             }
         ));
+        natsub.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                natsubMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(natsub);
 
         jPanel1.setBackground(new java.awt.Color(61, 42, 121));
@@ -112,6 +119,13 @@ public class natsubui extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
         jLabel10.setText("SubGroup Not Available Sessions");
 
+        jButton2.setText("Delete");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -122,7 +136,9 @@ public class natsubui extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jButton1)
-                        .addGap(201, 201, 201))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton2)
+                        .addGap(118, 118, 118))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
@@ -163,7 +179,9 @@ public class natsubui extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jButton1))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(jButton1)
+                                            .addComponent(jButton2)))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(40, 40, 40)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -191,7 +209,7 @@ public class natsubui extends javax.swing.JFrame {
     private void subgroup(){
           try{
             Class.forName("com.mysql.jdbc.Driver");
-            Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/spm","root","");
+         Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
             String sql = "SELECT subgrpidg FROM subgrpidgen";
             PreparedStatement pstmt = (PreparedStatement) conn.prepareStatement(sql);
             ResultSet rs = pstmt.executeQuery();
@@ -244,7 +262,7 @@ public class natsubui extends javax.swing.JFrame {
             
            Class.forName("com.mysql.jdbc.Driver");
            
-           Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/SPM","root","");
+         Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
             String query="insert into notavailablesub (subgroup,day,time) VALUES('"+y+"','"+days+"','"+timee+"')";
             java.sql.PreparedStatement pst=conn.prepareStatement(query);
              pst.executeUpdate();
@@ -266,12 +284,52 @@ public class natsubui extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void natsubMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_natsubMouseClicked
+        // TODO add your handling code here:
+        
+           int i = natsub.getSelectedRow();
+        TableModel model=natsub.getModel();
+        
+        
+        
+    }//GEN-LAST:event_natsubMouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        
+         try{
+           Class.forName("com.mysql.jdbc.Driver");
+           
+         Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
+                  //   Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/spm","root","");
+
+           int row=natsub.getSelectedRow();
+           String value=(natsub.getModel().getValueAt(row, 0).toString());
+           String query="delete from notavailablesub where id="+value;
+           java.sql.PreparedStatement pst=conn.prepareStatement(query);
+           pst.executeUpdate();
+           DefaultTableModel model=(DefaultTableModel)natsub.getModel();
+            model.setRowCount(0);
+            shownat();
+            JOptionPane.showMessageDialog(null,"deleted");
+           
+         }catch(Exception e){
+             JOptionPane.showMessageDialog(null,e);
+         }
+        
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
      public ArrayList<NotAvailableSubGrpClass> natretrieve(){
     ArrayList<NotAvailableSubGrpClass> sessionlist=new ArrayList<>();
      try{
            Class.forName("com.mysql.jdbc.Driver");
            
-           Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/SPM","root","");
+         Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
           String query="select * from notavailablesub";
           Statement st=conn.createStatement();
           ResultSet rs=st.executeQuery(query);
@@ -366,6 +424,7 @@ public class natsubui extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> day;
     private javax.swing.JComboBox<String> end;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;

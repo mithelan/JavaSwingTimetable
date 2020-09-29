@@ -36,7 +36,7 @@ public class Subgroup extends javax.swing.JFrame {
      try{
            Class.forName("com.mysql.jdbc.Driver");
            
-           Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/SPM","root","");
+         Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
           String query="select * from subgroup";
           Statement st=conn.createStatement();
           ResultSet rs=st.executeQuery(query);
@@ -243,7 +243,7 @@ public class Subgroup extends javax.swing.JFrame {
           try{
            Class.forName("com.mysql.jdbc.Driver");
            
-           Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/SPM","root","");
+         Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
            int row=subtable.getSelectedRow();
            String value=(subtable.getModel().getValueAt(row, 0).toString());
            String query="delete from subgroup where id="+value;
@@ -275,7 +275,7 @@ public class Subgroup extends javax.swing.JFrame {
         try{
            Class.forName("com.mysql.jdbc.Driver");
            
-           Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/SPM","root","");
+         Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
             String query="insert into subgroup (subgrpid) values (?)";
             PreparedStatement pst=conn.prepareStatement(query);
             pst.setString(1, subgrp.getText());
@@ -300,7 +300,7 @@ public class Subgroup extends javax.swing.JFrame {
          try{
            Class.forName("com.mysql.jdbc.Driver");
            
-           Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/SPM","root","");
+         Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
            int row=subtable.getSelectedRow();
            String value=(subtable.getModel().getValueAt(row, 0).toString());
            String query="UPDATE subgroup SET subgrpid=? where id="+value;

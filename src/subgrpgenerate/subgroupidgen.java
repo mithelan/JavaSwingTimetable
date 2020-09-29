@@ -37,7 +37,7 @@ public class subgroupidgen extends javax.swing.JFrame {
           private void tutorialdrop(){
           try{
             Class.forName("com.mysql.jdbc.Driver");
-            Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/spm","root","");
+         Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
                 String q="Tutorial";
             String sql = "SELECT grpidg FROM grpidgen";
             com.mysql.jdbc.PreparedStatement pstmt = (com.mysql.jdbc.PreparedStatement) conn.prepareStatement(sql);
@@ -71,7 +71,7 @@ public class subgroupidgen extends javax.swing.JFrame {
      try{
            Class.forName("com.mysql.jdbc.Driver");
            
-           Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/SPM","root","");
+         Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
           String query="select * from subgrpidgen";
           Statement st=conn.createStatement();
           ResultSet rs=st.executeQuery(query);
@@ -293,7 +293,7 @@ public void showgenerationsub(){
          try{
            Class.forName("com.mysql.jdbc.Driver");
            
-           Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/SPM","root","");
+         Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
             String query="insert into subgrpidgen (subgrpidg) values (?)";
             PreparedStatement pst=conn.prepareStatement(query);
            
@@ -332,7 +332,7 @@ public void showgenerationsub(){
          try{
            Class.forName("com.mysql.jdbc.Driver");
            
-           Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/SPM","root","");
+         Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
            int row=subgeneration.getSelectedRow();
            String value=(subgeneration.getModel().getValueAt(row, 0).toString());
            String query="delete from subgrpidgen where id="+value;

@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package spm;
+import HomeUI.HomePageUI;
 import group.Group;
 import grpgenerate.grpidgenerate;
 import spm.Admin;
@@ -22,7 +23,7 @@ public class SPM {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-         Home  pro=new Home();
+         HomePageUI  pro=new HomePageUI();
          pro.setVisible(true);
          
                 

@@ -14,6 +14,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -38,7 +39,7 @@ public class Overlapui extends javax.swing.JFrame {
      try{
            Class.forName("com.mysql.jdbc.Driver");
            
-           Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/SPM","root","");
+         Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
           String query="select * from olsessions";
           Statement st=conn.createStatement();
           ResultSet rs=st.executeQuery(query);
@@ -103,7 +104,7 @@ public class Overlapui extends javax.swing.JFrame {
        private void session1drop(){
           try{
             Class.forName("com.mysql.jdbc.Driver");
-            Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/spm","root","");
+         Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
             String sql = "SELECT sessionTot FROM session";
             PreparedStatement pstmt = (PreparedStatement) conn.prepareStatement(sql);
             ResultSet rs = pstmt.executeQuery();
@@ -121,7 +122,7 @@ public class Overlapui extends javax.swing.JFrame {
        private void session2drop(){
           try{
             Class.forName("com.mysql.jdbc.Driver");
-            Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/spm","root","");
+         Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
             String sql = "SELECT sessionTot FROM session";
             PreparedStatement pstmt = (PreparedStatement) conn.prepareStatement(sql);
             ResultSet rs = pstmt.executeQuery();
@@ -169,6 +170,7 @@ public class Overlapui extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -180,6 +182,11 @@ public class Overlapui extends javax.swing.JFrame {
                 "id", "Day", "Start Time", "Session1", "Session 2"
             }
         ));
+        overlaptable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                overlaptableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(overlaptable);
 
         day.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" }));
@@ -237,6 +244,13 @@ public class Overlapui extends javax.swing.JFrame {
         jLabel16.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel16.setText("Session 2");
 
+        jButton1.setText("Delete");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -247,34 +261,37 @@ public class Overlapui extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(31, 31, 31)
-                                .addComponent(jLabel11))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel12))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.TRAILING))))
-                        .addGap(24, 24, 24)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(day, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(session1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(starttime, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(session2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 218, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(31, 31, 31)
+                                        .addComponent(jLabel11))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel12))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.TRAILING))))
+                                .addGap(24, 24, 24)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(day, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(session1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(starttime, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(session2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 218, Short.MAX_VALUE)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(179, 179, 179)
-                                .addComponent(jLabel10))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(206, 206, 206)
-                                .addComponent(add)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                                .addComponent(jLabel10)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(169, 169, 169)
+                        .addComponent(add)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -303,9 +320,11 @@ public class Overlapui extends javax.swing.JFrame {
                             .addComponent(session2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel16))
                         .addGap(33, 33, 33)))
-                .addGap(108, 108, 108)
-                .addComponent(add)
-                .addGap(44, 44, 44))
+                .addGap(41, 41, 41)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(add)
+                    .addComponent(jButton1))
+                .addGap(111, 111, 111))
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -339,7 +358,7 @@ public class Overlapui extends javax.swing.JFrame {
             
            Class.forName("com.mysql.jdbc.Driver");
            
-           Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/SPM","root","");
+         Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
             String query="insert into olsessions (day,starttime,session1,session2) VALUES('"+days+"','"+stime+"','"+s1+"','"+s2+"')";
             java.sql.PreparedStatement pst=conn.prepareStatement(query);
              pst.executeUpdate();
@@ -373,6 +392,45 @@ public class Overlapui extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_addActionPerformed
+
+    private void overlaptableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_overlaptableMouseClicked
+        // TODO add your handling code here:
+        
+             int i = overlaptable.getSelectedRow();
+        TableModel model=overlaptable.getModel();
+    }//GEN-LAST:event_overlaptableMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+         try{
+           Class.forName("com.mysql.jdbc.Driver");
+           
+         Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
+                  //   Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/spm","root","");
+
+           int row=overlaptable.getSelectedRow();
+           String value=(overlaptable.getModel().getValueAt(row, 0).toString());
+           String query="delete from olsessions where id="+value;
+           java.sql.PreparedStatement pst=conn.prepareStatement(query);
+           pst.executeUpdate();
+           DefaultTableModel model=(DefaultTableModel)overlaptable.getModel();
+            model.setRowCount(0);
+            showolsessions();
+            JOptionPane.showMessageDialog(null,"deleted");
+           
+         }catch(Exception e){
+             JOptionPane.showMessageDialog(null,e);
+         }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -415,6 +473,7 @@ public class Overlapui extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton add;
     private javax.swing.JComboBox<String> day;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;

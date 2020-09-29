@@ -14,6 +14,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -37,7 +38,7 @@ public class ConsecUI extends javax.swing.JFrame {
     private void lecturedrop(){
           try{
             Class.forName("com.mysql.jdbc.Driver");
-            Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/spm","root","");
+         Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
             String sql = "SELECT sessionTot FROM session";
             PreparedStatement pstmt = (PreparedStatement) conn.prepareStatement(sql);
             ResultSet rs = pstmt.executeQuery();
@@ -55,7 +56,7 @@ public class ConsecUI extends javax.swing.JFrame {
     private void labdrop(){
           try{
             Class.forName("com.mysql.jdbc.Driver");
-            Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/spm","root","");
+         Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
             String sql = "SELECT sessionTot FROM session";
             PreparedStatement pstmt = (PreparedStatement) conn.prepareStatement(sql);
             ResultSet rs = pstmt.executeQuery();
@@ -73,7 +74,7 @@ public class ConsecUI extends javax.swing.JFrame {
       private void tutorialdrop(){
           try{
             Class.forName("com.mysql.jdbc.Driver");
-            Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/spm","root","");
+         Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
                 String q="Tutorial";
             String sql = "SELECT sessionTot FROM session";
             PreparedStatement pstmt = (PreparedStatement) conn.prepareStatement(sql);
@@ -123,6 +124,7 @@ public class ConsecUI extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        Delete = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -134,6 +136,11 @@ public class ConsecUI extends javax.swing.JFrame {
                 "ConID", "Lecture", "Lab", "Tutorial"
             }
         ));
+        csessiontab.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                csessiontabMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(csessiontab);
 
         lab.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NA" }));
@@ -182,6 +189,13 @@ public class ConsecUI extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel6.setText("Lecturer ");
 
+        Delete.setText("Delete");
+        Delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -207,8 +221,13 @@ public class ConsecUI extends javax.swing.JFrame {
                                     .addComponent(lecture, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(lab, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(tutorial, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(106, 106, 106)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 543, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(106, 106, 106)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 543, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(Delete)))))
                 .addGap(51, 51, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -236,7 +255,9 @@ public class ConsecUI extends javax.swing.JFrame {
                             .addComponent(tutorial, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5))))
                 .addGap(79, 79, 79)
-                .addComponent(add)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(add)
+                    .addComponent(Delete))
                 .addContainerGap(179, Short.MAX_VALUE))
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -256,7 +277,7 @@ public class ConsecUI extends javax.swing.JFrame {
             ttutorial = tutorial.getSelectedItem().toString();
            Class.forName("com.mysql.jdbc.Driver");
            
-           Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/SPM","root","");
+         Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
             String query="insert into csessions (lecture,lab,tutorial)VALUES('"+lec+"','"+labb+"','"+ttutorial+"')";
             java.sql.PreparedStatement pst=conn.prepareStatement(query);
              pst.executeUpdate();
@@ -274,12 +295,48 @@ public class ConsecUI extends javax.swing.JFrame {
         
     }//GEN-LAST:event_addActionPerformed
 
+    private void csessiontabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_csessiontabMouseClicked
+        // TODO add your handling code here:
+             int i = csessiontab.getSelectedRow();
+        TableModel model=csessiontab.getModel();
+    }//GEN-LAST:event_csessiontabMouseClicked
+
+    private void DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteActionPerformed
+        // TODO add your handling code here:
+         try{
+           Class.forName("com.mysql.jdbc.Driver");
+           
+         Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
+                  //   Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/spm","root","");
+
+           int row=csessiontab.getSelectedRow();
+           String value=(csessiontab.getModel().getValueAt(row, 0).toString());
+           String query="delete from csessions where id="+value;
+           java.sql.PreparedStatement pst=conn.prepareStatement(query);
+           pst.executeUpdate();
+           DefaultTableModel model=(DefaultTableModel)csessiontab.getModel();
+            model.setRowCount(0);
+            showcsec();
+            JOptionPane.showMessageDialog(null,"deleted");
+           
+         }catch(Exception e){
+             JOptionPane.showMessageDialog(null,e);
+         }
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_DeleteActionPerformed
+
      public ArrayList<Consecsession> csessiondetailsretrieve(){
     ArrayList<Consecsession> sessionlist=new ArrayList<>();
      try{
            Class.forName("com.mysql.jdbc.Driver");
            
-           Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/SPM","root","");
+         Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
+                //     Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/spm","root","");
+
           String query="select * from csessions";
           Statement st=conn.createStatement();
           ResultSet rs=st.executeQuery(query);
@@ -358,6 +415,7 @@ public class ConsecUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Delete;
     private javax.swing.JButton add;
     private javax.swing.JTable csessiontab;
     private javax.swing.JLabel jLabel1;
