@@ -63,7 +63,7 @@ public class AddSession extends javax.swing.JFrame {
                         rs.getString("studentGroup"),
                         rs.getString("subject"),
                         rs.getString("no_of_students"),
-                          rs.getInt("id")
+                        rs.getInt("id")
 //                        rs.getString("subgroup"),
 //                        rs.getString("sessionDuration")
                 );
@@ -295,6 +295,8 @@ public class AddSession extends javax.swing.JFrame {
         searchLectu = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         numberStudents = new javax.swing.JTextField();
+        button1 = new java.awt.Button();
+        label1 = new java.awt.Label();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -523,6 +525,15 @@ public class AddSession extends javax.swing.JFrame {
             }
         });
 
+        button1.setLabel("Delete Session");
+        button1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button1ActionPerformed(evt);
+            }
+        });
+
+        label1.setText("Select Row and Click");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -591,14 +602,17 @@ public class AddSession extends javax.swing.JFrame {
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 920, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(42, 42, 42))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(373, 373, 373)
-                                .addComponent(jLabel9))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(241, 241, 241)
-                                .addComponent(addRecord, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(373, 373, 373)
+                        .addComponent(jLabel9)
+                        .addGap(0, 851, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(241, 241, 241)
+                        .addComponent(addRecord, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(25, 25, 25)
+                        .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(445, 445, 445))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -651,10 +665,17 @@ public class AddSession extends javax.swing.JFrame {
                         .addComponent(jLabel11)
                         .addComponent(jLabel12)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(13, 13, 13)
-                .addComponent(addRecord, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(13, 13, 13)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(button1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(addRecord, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(23, 23, 23))))
         );
 
         pack();
@@ -1055,6 +1076,27 @@ public class AddSession extends javax.swing.JFrame {
         g.setVisible(true);
     }//GEN-LAST:event_viewsActionPerformed
 
+    private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
+       
+        try{
+          Class.forName("com.mysql.jdbc.Driver");
+
+         Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
+            int row = sessionTable.getSelectedRow();
+            String value = (sessionTable.getModel().getValueAt(row, 5).toString());
+            String query = "delete from session where id=" + value;
+            java.sql.PreparedStatement pst = conn.prepareStatement(query);
+            pst.executeUpdate();
+            DefaultTableModel model = (DefaultTableModel) sessionTable.getModel();
+            model.setRowCount(0);
+            show_user();
+            JOptionPane.showMessageDialog(null, "Deleted");
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_button1ActionPerformed
+
    
 
     /**
@@ -1094,6 +1136,7 @@ public class AddSession extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addRecord;
+    private java.awt.Button button1;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> groupidCombo;
     private javax.swing.JLabel jLabel1;
@@ -1114,6 +1157,7 @@ public class AddSession extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTable1;
+    private java.awt.Label label1;
     private javax.swing.JComboBox<String> lecCombo1;
     private javax.swing.JComboBox<String> lecCombo2;
     private javax.swing.JComboBox<String> lecCombo3;
