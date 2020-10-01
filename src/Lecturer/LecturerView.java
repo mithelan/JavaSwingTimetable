@@ -179,6 +179,8 @@ public class LecturerView extends javax.swing.JFrame {
                 "Firstname", "Lastname", "Empid", "Faculty", "Building", "Center", "Department", "Level", "Rank"
             }
         ));
+        jTable_display.setGridColor(new java.awt.Color(204, 204, 255));
+        jTable_display.setRowHeight(25);
         jTable_display.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable_displayMouseClicked(evt);
