@@ -580,6 +580,7 @@ Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting
                     "','" + comboBatch.getSelectedItem().toString() + "','" + comboDay.getSelectedItem().toString() + "','" + 
                     comboTimeSlot.getSelectedItem().toString() + "')";
             statement.execute(query);
+             JOptionPane.showMessageDialog(null,"Added succesfully");
 
         } catch (Exception e) {
             System.out.println(e);

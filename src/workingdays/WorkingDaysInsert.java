@@ -327,6 +327,7 @@ public class WorkingDaysInsert extends javax.swing.JFrame {
          String query = "insert into workingdays(no_working_days,working_hours,days,batch) values("+    workingDays    +     ","     +totalMinutes+ ",'"+ days + "','"+ batchString+"')";
          DbConnection connection = new DbConnection();
          connection.databaseConnection(query);
+          JOptionPane.showMessageDialog(null,"Added succesfully");
         
          
          }
