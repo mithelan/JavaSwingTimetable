@@ -22,7 +22,10 @@ import group.Group;
 import spm.programme.Programme;
 import subgroup.Subgroup;
 import tags.Tags;
+import workingdays.TimeSlotInsert;
+import workingdays.TimeTable_Generate;
 import workingdays.ViewTimeTable;
+import workingdays.WorkingDaysInsert;
 
 /**
  *
@@ -84,6 +87,10 @@ public class HomePageUI extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jPanel9 = new javax.swing.JPanel();
+        jPanel10 = new javax.swing.JPanel();
+        btnWorkingdays = new javax.swing.JButton();
+        btnTimeSlot = new javax.swing.JButton();
+        btnSessionToTime = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -175,7 +182,7 @@ public class HomePageUI extends javax.swing.JFrame {
                 .addComponent(addLec2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addComponent(lecInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(158, Short.MAX_VALUE))
+                .addContainerGap(138, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Lecturer", jPanel2);
@@ -224,7 +231,7 @@ public class HomePageUI extends javax.swing.JFrame {
                 .addComponent(addSub, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(subInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(153, Short.MAX_VALUE))
+                .addContainerGap(133, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Subject", jPanel3);
@@ -273,7 +280,7 @@ public class HomePageUI extends javax.swing.JFrame {
                 .addComponent(addSession, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
                 .addComponent(viewSession, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(122, Short.MAX_VALUE))
+                .addContainerGap(102, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Session", jPanel4);
@@ -321,7 +328,7 @@ public class HomePageUI extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
-                .addContainerGap(229, Short.MAX_VALUE))
+                .addContainerGap(209, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Group Details", jPanel5);
@@ -392,7 +399,7 @@ public class HomePageUI extends javax.swing.JFrame {
                     .addComponent(jButton9)
                     .addComponent(jButton10)
                     .addComponent(jButton11))
-                .addContainerGap(216, Short.MAX_VALUE))
+                .addContainerGap(196, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Not Available Time Slots", jPanel6);
@@ -452,7 +459,7 @@ public class HomePageUI extends javax.swing.JFrame {
                     .addComponent(jButton3)
                     .addComponent(jButton4)
                     .addComponent(jButton5))
-                .addContainerGap(222, Short.MAX_VALUE))
+                .addContainerGap(202, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Special Sessions", jPanel7);
@@ -501,7 +508,7 @@ public class HomePageUI extends javax.swing.JFrame {
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton6)
                     .addComponent(jButton7))
-                .addContainerGap(235, Short.MAX_VALUE))
+                .addContainerGap(215, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Programmes & Tags", jPanel8);
@@ -514,10 +521,60 @@ public class HomePageUI extends javax.swing.JFrame {
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 280, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Timtable", jPanel9);
+
+        btnWorkingdays.setForeground(new java.awt.Color(0, 0, 153));
+        btnWorkingdays.setText("Add working days");
+        btnWorkingdays.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnWorkingdaysActionPerformed(evt);
+            }
+        });
+
+        btnTimeSlot.setForeground(new java.awt.Color(0, 0, 153));
+        btnTimeSlot.setText("Add TimeSlot");
+        btnTimeSlot.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTimeSlotActionPerformed(evt);
+            }
+        });
+
+        btnSessionToTime.setForeground(new java.awt.Color(0, 0, 153));
+        btnSessionToTime.setText("Add Session To TimeSlot");
+        btnSessionToTime.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSessionToTimeActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addGap(69, 69, 69)
+                .addComponent(btnWorkingdays)
+                .addGap(61, 61, 61)
+                .addComponent(btnTimeSlot, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(77, 77, 77)
+                .addComponent(btnSessionToTime)
+                .addContainerGap(73, Short.MAX_VALUE))
+        );
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addGap(54, 54, 54)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnWorkingdays)
+                    .addComponent(btnTimeSlot, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSessionToTime))
+                .addContainerGap(192, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Working days", jPanel10);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -661,12 +718,30 @@ public class HomePageUI extends javax.swing.JFrame {
     }//GEN-LAST:event_viewSessionActionPerformed
 
     private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
-        // TODO add your handling code here:
+            // TODO add your handling code here:
         
         ViewTimeTable v=new ViewTimeTable();
         v.setVisible(true);
         
     }//GEN-LAST:event_button1ActionPerformed
+
+    private void btnWorkingdaysActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWorkingdaysActionPerformed
+        // TODO add your handling code here:
+        WorkingDaysInsert w = new WorkingDaysInsert();
+        w.setVisible(true);
+    }//GEN-LAST:event_btnWorkingdaysActionPerformed
+
+    private void btnTimeSlotActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimeSlotActionPerformed
+        // TODO add your handling code here:
+        TimeSlotInsert i = new TimeSlotInsert();
+        i.setVisible(true);
+    }//GEN-LAST:event_btnTimeSlotActionPerformed
+
+    private void btnSessionToTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSessionToTimeActionPerformed
+        // TODO add your handling code here:
+        TimeTable_Generate t = new TimeTable_Generate();
+        t.setVisible(true);
+    }//GEN-LAST:event_btnSessionToTimeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -707,6 +782,9 @@ public class HomePageUI extends javax.swing.JFrame {
     private javax.swing.JButton addLec2;
     private javax.swing.JButton addSession;
     private javax.swing.JButton addSub;
+    private javax.swing.JButton btnSessionToTime;
+    private javax.swing.JButton btnTimeSlot;
+    private javax.swing.JButton btnWorkingdays;
     private java.awt.Button button1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
@@ -729,6 +807,7 @@ public class HomePageUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;

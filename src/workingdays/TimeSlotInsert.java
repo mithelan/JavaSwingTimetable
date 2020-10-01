@@ -87,9 +87,9 @@ public class TimeSlotInsert extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         rbOneHour = new javax.swing.JRadioButton();
         rbThirtyMinutes = new javax.swing.JRadioButton();
-        jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
 
         jCheckBox1.setText("jCheckBox1");
 
@@ -137,50 +137,46 @@ public class TimeSlotInsert extends javax.swing.JFrame {
 
         rbThirtyMinutes.setText("Thirty Minutes");
 
-        jPanel1.setBackground(new java.awt.Color(102, 255, 204));
-        jPanel1.setForeground(new java.awt.Color(102, 255, 204));
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 14, Short.MAX_VALUE)
-        );
-
-        jPanel2.setBackground(new java.awt.Color(102, 255, 204));
-        jPanel2.setForeground(new java.awt.Color(102, 255, 204));
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 14, Short.MAX_VALUE)
-        );
-
         jLabel9.setBackground(new java.awt.Color(51, 255, 204));
         jLabel9.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(51, 51, 51));
         jLabel9.setText("Add TimeSlots");
         jLabel9.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
+        jPanel1.setBackground(new java.awt.Color(61, 42, 121));
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel8.setText("TIME TABLE SYSTEM");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel8)
+                .addContainerGap(57, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel8)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel9)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(69, 69, 69)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
                             .addComponent(jLabel2)
@@ -197,20 +193,16 @@ public class TimeSlotInsert extends javax.swing.JFrame {
                                 .addComponent(rbThirtyMinutes))
                             .addComponent(cbBatch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(203, 203, 203)
+                        .addGap(134, 134, 134)
                         .addComponent(btnAdd)))
-                .addContainerGap(164, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel9)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(19, 19, 19))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
+                .addGap(27, 27, 27)
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(109, 109, 109)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 114, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(cbBatch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -226,8 +218,8 @@ public class TimeSlotInsert extends javax.swing.JFrame {
                     .addComponent(cbMinutes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(36, 36, 36)
                 .addComponent(btnAdd)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(71, 71, 71))
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -331,9 +323,9 @@ public class TimeSlotInsert extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JRadioButton rbOneHour;
     private javax.swing.JRadioButton rbThirtyMinutes;
     // End of variables declaration//GEN-END:variables
