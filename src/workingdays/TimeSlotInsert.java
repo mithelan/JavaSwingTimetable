@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package workingdays;
 
 import java.sql.Connection;
@@ -19,6 +18,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -29,46 +29,42 @@ public class TimeSlotInsert extends javax.swing.JFrame {
     /**
      * Creates new form TimeSlotInsert
      */
-   
     public TimeSlotInsert() {
         initComponents();
-         ButtonGroup G = new ButtonGroup();
+        ButtonGroup G = new ButtonGroup();
         G.add(rbOneHour);
         G.add(rbThirtyMinutes);
 
         populateBatch();
-      
+
     }
-   
-        public  void populateBatch(){
-    
-            try {
-             Class.forName("com.mysql.jdbc.Driver");
-           
-           Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/spm","root","");
 
-        Statement statement = conn.createStatement();
- 
-    ResultSet   rs = statement.executeQuery("SELECT * FROM workingdays");
-     
+    public void populateBatch() {
 
-while (rs.next()) {
-             String data;
-            data = rs.getString("batch");        
-       
-       cbBatch.addItem(new ComboItem(data, data));
-    
-}
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
 
-  } catch (ClassNotFoundException  ex) {
+            Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
+
+            Statement statement = conn.createStatement();
+
+            ResultSet rs = statement.executeQuery("SELECT * FROM workingdays");
+
+            while (rs.next()) {
+                String data;
+                data = rs.getString("batch");
+
+                cbBatch.addItem(new ComboItem(data, data));
+
+            }
+
+        } catch (ClassNotFoundException ex) {
             Logger.getLogger(TimeSlotInsert.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        catch(SQLException e){
-             Logger.getLogger(TimeSlotInsert.class.getName()).log(Level.SEVERE, null, e);
+        } catch (SQLException e) {
+            Logger.getLogger(TimeSlotInsert.class.getName()).log(Level.SEVERE, null, e);
         }
     }
-        
-  
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -242,48 +238,36 @@ while (rs.next()) {
     }//GEN-LAST:event_cbHoursActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-       String value;
-       
-        
-        int hours= 0 , minutes=0;
-        
+        String value;
+
+        int hours = 0, minutes = 0;
+
         value = cbHours.getSelectedItem().toString();
         hours = Integer.valueOf(value);
-        
+
         String value2 = cbMinutes.getSelectedItem().toString();
         minutes = Integer.valueOf(value);
-        
-       String batch = cbBatch.getSelectedItem().toString();
-       int type =0;
-       
-       if(rbOneHour.isSelected()){
-           type = 60;
-       
-       }else if(rbThirtyMinutes.isSelected()){
-       type = 30;
-       
-       }else{
-       //Error
-       }
-        
-       
-          String time= value+":"+value2;
-   
 
-        
-    
-   
-      
-     
-        String query = "insert into timeslots(batch,type,start_time) values('"+    batch    +     "',"     +type+ ",'"+ time +"')";
-         DbConnection connection = new DbConnection();
-         connection.databaseConnection(query);
-        
-     
-        
-        
-        
+        String batch = cbBatch.getSelectedItem().toString();
+        int type = 0;
 
+        if (rbOneHour.isSelected()) {
+            type = 60;
+
+        } else if (rbThirtyMinutes.isSelected()) {
+            type = 30;
+
+        } else {
+            //Error
+        }
+
+        String time = value + ":" + value2;
+
+        String query = "insert into timeslots(batch,type,start_time) values('" + batch + "'," + type + ",'" + time + "')";
+        DbConnection connection = new DbConnection();
+        connection.databaseConnection(query);
+        
+        JOptionPane.showMessageDialog(null, "Time slot successfully");
 
 
     }//GEN-LAST:event_btnAddActionPerformed

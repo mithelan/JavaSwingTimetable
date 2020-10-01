@@ -22,6 +22,7 @@ import group.Group;
 import spm.programme.Programme;
 import subgroup.Subgroup;
 import tags.Tags;
+import workingdays.ViewTimeTable;
 
 /**
  *
@@ -47,6 +48,7 @@ public class HomePageUI extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
+        button1 = new java.awt.Button();
         jLabel9 = new javax.swing.JLabel();
         label1 = new java.awt.Label();
         jTabbedPane1 = new javax.swing.JTabbedPane();
@@ -91,13 +93,22 @@ public class HomePageUI extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(153, 153, 153));
         jLabel8.setText("DASHBOARD");
 
+        button1.setLabel("View Timetable");
+        button1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(96, 96, 96)
-                .addComponent(jLabel8)
+                .addGap(87, 87, 87)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
                 .addContainerGap(109, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -105,6 +116,8 @@ public class HomePageUI extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addComponent(jLabel8)
+                .addGap(182, 182, 182)
+                .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -504,7 +517,7 @@ public class HomePageUI extends javax.swing.JFrame {
             .addGap(0, 300, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("tab8", jPanel9);
+        jTabbedPane1.addTab("Timtable", jPanel9);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -647,6 +660,14 @@ public class HomePageUI extends javax.swing.JFrame {
                le.setVisible(true);
     }//GEN-LAST:event_viewSessionActionPerformed
 
+    private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
+        // TODO add your handling code here:
+        
+        ViewTimeTable v=new ViewTimeTable();
+        v.setVisible(true);
+        
+    }//GEN-LAST:event_button1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -686,6 +707,7 @@ public class HomePageUI extends javax.swing.JFrame {
     private javax.swing.JButton addLec2;
     private javax.swing.JButton addSession;
     private javax.swing.JButton addSub;
+    private java.awt.Button button1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
