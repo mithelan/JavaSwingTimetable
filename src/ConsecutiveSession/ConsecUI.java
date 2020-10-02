@@ -5,6 +5,7 @@
  */
 package ConsecutiveSession;
 
+import HomeUI.HomePageUI;
 import com.mysql.jdbc.PreparedStatement;
 import group.Grpdetails;
 import java.sql.Connection;
@@ -126,6 +127,7 @@ public class ConsecUI extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         Delete = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -197,6 +199,15 @@ public class ConsecUI extends javax.swing.JFrame {
             }
         });
 
+        jButton3.setBackground(new java.awt.Color(0, 0, 204));
+        jButton3.setForeground(new java.awt.Color(240, 240, 240));
+        jButton3.setText("Home");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -228,7 +239,9 @@ public class ConsecUI extends javax.swing.JFrame {
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 543, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
-                                .addComponent(Delete)))))
+                                .addComponent(Delete)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton3)))))
                 .addGap(51, 51, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -258,7 +271,8 @@ public class ConsecUI extends javax.swing.JFrame {
                 .addGap(79, 79, 79)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(add)
-                    .addComponent(Delete))
+                    .addComponent(Delete)
+                    .addComponent(jButton3))
                 .addContainerGap(179, Short.MAX_VALUE))
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -334,6 +348,12 @@ public class ConsecUI extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_DeleteActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        HomePageUI home =new HomePageUI();
+        home.setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
      public ArrayList<Consecsession> csessiondetailsretrieve(){
     ArrayList<Consecsession> sessionlist=new ArrayList<>();
@@ -424,6 +444,7 @@ public class ConsecUI extends javax.swing.JFrame {
     private javax.swing.JButton Delete;
     private javax.swing.JButton add;
     private javax.swing.JTable csessiontab;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

@@ -5,6 +5,7 @@
  */
 package spm.programme;
 
+import HomeUI.HomePageUI;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -356,7 +357,7 @@ public void showprogramme(){
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        Home home =new Home();
+        HomePageUI home =new HomePageUI();
         home.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 

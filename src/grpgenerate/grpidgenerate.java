@@ -5,6 +5,7 @@
  */
 package grpgenerate;
 
+import HomeUI.HomePageUI;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -409,7 +410,7 @@ public void showgeneration(){
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        Home home = new Home();
+          HomePageUI home =new HomePageUI();
         home.setVisible(true);
         
         

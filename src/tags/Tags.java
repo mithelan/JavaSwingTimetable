@@ -5,6 +5,7 @@
  */
 package tags;
 
+import HomeUI.HomePageUI;
 import group.Grpdetails;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -334,7 +335,7 @@ public class Tags extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        Home home =new Home();
+        HomePageUI home =new HomePageUI();
         home.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
