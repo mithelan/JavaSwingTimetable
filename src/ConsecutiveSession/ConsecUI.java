@@ -12,6 +12,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -184,7 +185,7 @@ public class ConsecUI extends javax.swing.JFrame {
         jLabel1.setText("Lab");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jLabel5.setText("Lecturer ");
+        jLabel5.setText("Tutorial");
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel6.setText("Lecturer ");
@@ -278,10 +279,15 @@ public class ConsecUI extends javax.swing.JFrame {
            Class.forName("com.mysql.jdbc.Driver");
            
          Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
+            if( lec.isEmpty() || labb.isEmpty() || ttutorial.isEmpty()  ){
+                String message="All Field Should be filled";
+                 JOptionPane.showMessageDialog(new JFrame(), message, "Dialog",
+                JOptionPane.ERROR_MESSAGE);
+            }else{
             String query="insert into csessions (lecture,lab,tutorial)VALUES('"+lec+"','"+labb+"','"+ttutorial+"')";
             java.sql.PreparedStatement pst=conn.prepareStatement(query);
              pst.executeUpdate();
-           
+            }
            DefaultTableModel model=(DefaultTableModel)csessiontab.getModel();
             model.setRowCount(0);
             showcsec();

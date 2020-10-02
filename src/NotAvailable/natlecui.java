@@ -12,6 +12,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -322,10 +323,15 @@ public class natlecui extends javax.swing.JFrame {
            Class.forName("com.mysql.jdbc.Driver");
            
          Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
+          if( timee.isEmpty() || days.isEmpty() || y.isEmpty()  ){
+                String message="All Field Should be filled";
+                 JOptionPane.showMessageDialog(new JFrame(), message, "Dialog",
+                JOptionPane.ERROR_MESSAGE);
+            }else{
             String query="insert into notavailablelec (lecturer,day,time) VALUES('"+y+"','"+days+"','"+timee+"')";
             java.sql.PreparedStatement pst=conn.prepareStatement(query);
              pst.executeUpdate();
-           
+          }
          DefaultTableModel model=(DefaultTableModel)natlec.getModel();
            model.setRowCount(0);
            shownat();

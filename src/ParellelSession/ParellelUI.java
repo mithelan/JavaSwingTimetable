@@ -15,6 +15,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import javafx.scene.control.DatePicker;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -447,9 +448,15 @@ String sqlquery="select sessionTot from session where studentGroup like'%"+yearc
            Class.forName("com.mysql.jdbc.Driver");
            
          Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
+         if( s1.isEmpty() || s2.isEmpty() || s3.isEmpty()  || starttimee.isEmpty()  || duration.getText().isEmpty() || day.isEmpty() ){
+                String message="All Field Should be filled";
+                 JOptionPane.showMessageDialog(new JFrame(), message, "Dialog",
+                JOptionPane.ERROR_MESSAGE);
+            }else{
             String query="insert into psessions (startdate,starttime,duration,session1,session2,session3) VALUES('"+day+"','"+starttimee+"','"+duration.getText()+"','"+s1+"','"+s2+"','"+s3+"')";
             java.sql.PreparedStatement pst=conn.prepareStatement(query);
              pst.executeUpdate();
+         }
            
            DefaultTableModel model=(DefaultTableModel)parelleltbl.getModel();
             model.setRowCount(0);

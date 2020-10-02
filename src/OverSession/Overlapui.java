@@ -12,6 +12,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -359,9 +360,15 @@ public class Overlapui extends javax.swing.JFrame {
            Class.forName("com.mysql.jdbc.Driver");
            
          Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
+          if( s1.isEmpty() || s2.isEmpty() || days.isEmpty()  || stime.isEmpty()  ){
+                String message="All Field Should be filled";
+                 JOptionPane.showMessageDialog(new JFrame(), message, "Dialog",
+                JOptionPane.ERROR_MESSAGE);
+            }else{
             String query="insert into olsessions (day,starttime,session1,session2) VALUES('"+days+"','"+stime+"','"+s1+"','"+s2+"')";
             java.sql.PreparedStatement pst=conn.prepareStatement(query);
              pst.executeUpdate();
+          }
            
           DefaultTableModel model=(DefaultTableModel)overlaptable.getModel();
            model.setRowCount(0);

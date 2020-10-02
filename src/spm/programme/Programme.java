@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -290,10 +291,15 @@ public void showprogramme(){
             String query="insert into programme(proname) values (?)";
             PreparedStatement pst=conn.prepareStatement(query);
             pst.setString(1, programme_name.getText());
-           
+            if(  programme_name.getText().isEmpty()  ){
+                String message="All Field Should be filled";
+                 JOptionPane.showMessageDialog(new JFrame(), message, "Dialog",
+                JOptionPane.ERROR_MESSAGE);
+            }else{
            
            
             pst.executeUpdate();
+            }
             DefaultTableModel model=(DefaultTableModel)programmetable.getModel();
             model.setRowCount(0);
             showprogramme();

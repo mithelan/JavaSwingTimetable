@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -298,10 +299,15 @@ public class Tags extends javax.swing.JFrame {
             String query="insert into tags (tag) values (?)";
             PreparedStatement pst=conn.prepareStatement(query);
             pst.setString(1, tag.getText());
-           
+            if( tag.getText().isEmpty()   ){
+                String message="All Field Should be filled";
+                 JOptionPane.showMessageDialog(new JFrame(), message, "Dialog",
+                JOptionPane.ERROR_MESSAGE);
+            }else{
            
            
             pst.executeUpdate();
+            }
             DefaultTableModel model=(DefaultTableModel)tagtable.getModel();
             model.setRowCount(0);
             showtag();

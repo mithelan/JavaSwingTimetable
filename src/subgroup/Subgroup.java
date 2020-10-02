@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -280,9 +281,14 @@ public class Subgroup extends javax.swing.JFrame {
             PreparedStatement pst=conn.prepareStatement(query);
             pst.setString(1, subgrp.getText());
            
-           
+            if( subgrp.getText().isEmpty()  ){
+                String message="All Field Should be filled";
+                 JOptionPane.showMessageDialog(new JFrame(), message, "Dialog",
+                JOptionPane.ERROR_MESSAGE);
+            }else{
            
             pst.executeUpdate();
+            }
             DefaultTableModel model=(DefaultTableModel)subtable.getModel();
             model.setRowCount(0);
             showsubgroup();
