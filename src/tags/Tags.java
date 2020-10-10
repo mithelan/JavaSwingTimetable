@@ -5,6 +5,7 @@
  */
 package tags;
 
+import HomeUI.HomePageUI;
 import group.Grpdetails;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -12,6 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -36,7 +38,7 @@ public class Tags extends javax.swing.JFrame {
      try{
            Class.forName("com.mysql.jdbc.Driver");
            
-           Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/SPM","root","");
+       Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12369942","sql12369942","5g6lr3KRxN");
           String query="select * from tags";
           Statement st=conn.createStatement();
           ResultSet rs=st.executeQuery(query);
@@ -244,7 +246,7 @@ public class Tags extends javax.swing.JFrame {
         try{
            Class.forName("com.mysql.jdbc.Driver");
            
-           Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/SPM","root","");
+          Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12369942","sql12369942","5g6lr3KRxN");
            int row=tagtable.getSelectedRow();
            String value=(tagtable.getModel().getValueAt(row, 0).toString());
            String query="delete from tags where id="+value;
@@ -268,7 +270,7 @@ public class Tags extends javax.swing.JFrame {
           try{
            Class.forName("com.mysql.jdbc.Driver");
            
-           Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/SPM","root","");
+           Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12369942","sql12369942","5g6lr3KRxN");
            int row=tagtable.getSelectedRow();
            String value=(tagtable.getModel().getValueAt(row, 0).toString());
            String query="UPDATE tags SET tag=? where id="+value;
@@ -294,14 +296,19 @@ public class Tags extends javax.swing.JFrame {
          try{
            Class.forName("com.mysql.jdbc.Driver");
            
-           Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/SPM","root","");
+           Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12369942","sql12369942","5g6lr3KRxN");
             String query="insert into tags (tag) values (?)";
             PreparedStatement pst=conn.prepareStatement(query);
             pst.setString(1, tag.getText());
-           
+            if( tag.getText().isEmpty()   ){
+                String message="All Field Should be filled";
+                 JOptionPane.showMessageDialog(new JFrame(), message, "Dialog",
+                JOptionPane.ERROR_MESSAGE);
+            }else{
            
            
             pst.executeUpdate();
+            }
             DefaultTableModel model=(DefaultTableModel)tagtable.getModel();
             model.setRowCount(0);
             showtag();
@@ -328,7 +335,7 @@ public class Tags extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        Home home =new Home();
+        HomePageUI home =new HomePageUI();
         home.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 

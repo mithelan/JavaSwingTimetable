@@ -13,6 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -37,7 +38,7 @@ public class Group extends javax.swing.JFrame {
      try{
            Class.forName("com.mysql.jdbc.Driver");
            
-         Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
+        Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12369942","sql12369942","5g6lr3KRxN");
           String query="select * from groupid";
           Statement st=conn.createStatement();
           ResultSet rs=st.executeQuery(query);
@@ -241,7 +242,12 @@ public class Group extends javax.swing.JFrame {
          try{
            Class.forName("com.mysql.jdbc.Driver");
            
-           Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
+          Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12369942","sql12369942","5g6lr3KRxN");
+           if( groupid.getText().isEmpty()  ){
+                String message="All Field Should be filled";
+                 JOptionPane.showMessageDialog(new JFrame(), message, "Dialog",
+                JOptionPane.ERROR_MESSAGE);
+            }else{
             String query="insert into groupid (groupid) values (?)";
             PreparedStatement pst=conn.prepareStatement(query);
             pst.setString(1, groupid.getText());
@@ -249,6 +255,7 @@ public class Group extends javax.swing.JFrame {
            
            
             pst.executeUpdate();
+           }
             DefaultTableModel model=(DefaultTableModel)grouptable.getModel();
             model.setRowCount(0);
             showgroup();
@@ -278,7 +285,7 @@ public class Group extends javax.swing.JFrame {
          try{
            Class.forName("com.mysql.jdbc.Driver");
            
-          Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
+         Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12369942","sql12369942","5g6lr3KRxN");
            int row=grouptable.getSelectedRow();
            String value=(grouptable.getModel().getValueAt(row, 0).toString());
            String query="delete from groupid where id="+value;
@@ -302,7 +309,7 @@ public class Group extends javax.swing.JFrame {
          try{
            Class.forName("com.mysql.jdbc.Driver");
            
-      Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
+     Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12369942","sql12369942","5g6lr3KRxN");
            int row=grouptable.getSelectedRow();
            String value=(grouptable.getModel().getValueAt(row, 0).toString());
            String query="UPDATE groupid SET groupid=? where id="+value;

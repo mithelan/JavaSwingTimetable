@@ -5,12 +5,14 @@
  */
 package spm.programme;
 
+import HomeUI.HomePageUI;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -37,7 +39,7 @@ public class Programme extends javax.swing.JFrame {
      try{
            Class.forName("com.mysql.jdbc.Driver");
            
-         Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
+        Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12369942","sql12369942","5g6lr3KRxN");
           String query="select * from programme";
           Statement st=conn.createStatement();
           ResultSet rs=st.executeQuery(query);
@@ -262,7 +264,7 @@ public void showprogramme(){
          try{
            Class.forName("com.mysql.jdbc.Driver");
            
-         Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
+        Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12369942","sql12369942","5g6lr3KRxN");
            int row=programmetable.getSelectedRow();
            String value=(programmetable.getModel().getValueAt(row, 0).toString());
            String query="UPDATE programme SET proname=? where id="+value;
@@ -286,14 +288,19 @@ public void showprogramme(){
          try{
            Class.forName("com.mysql.jdbc.Driver");
            
-         Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
+        Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12369942","sql12369942","5g6lr3KRxN");
             String query="insert into programme(proname) values (?)";
             PreparedStatement pst=conn.prepareStatement(query);
             pst.setString(1, programme_name.getText());
-           
+            if(  programme_name.getText().isEmpty()  ){
+                String message="All Field Should be filled";
+                 JOptionPane.showMessageDialog(new JFrame(), message, "Dialog",
+                JOptionPane.ERROR_MESSAGE);
+            }else{
            
            
             pst.executeUpdate();
+            }
             DefaultTableModel model=(DefaultTableModel)programmetable.getModel();
             model.setRowCount(0);
             showprogramme();
@@ -320,7 +327,7 @@ public void showprogramme(){
         try{
            Class.forName("com.mysql.jdbc.Driver");
            
-         Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
+        Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12369942","sql12369942","5g6lr3KRxN");
            int row=programmetable.getSelectedRow();
            String value=(programmetable.getModel().getValueAt(row, 0).toString());
            String query="delete from programme where id="+value;
@@ -350,7 +357,7 @@ public void showprogramme(){
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        Home home =new Home();
+        HomePageUI home =new HomePageUI();
         home.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 

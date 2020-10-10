@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package locations;
-import com.mysql.jdbc.PreparedStatement;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -58,10 +58,10 @@ public class LocationInsert extends javax.swing.JFrame {
     
     private void buildingDrop() 
     {
-        
+//        room_building.removeAllItems();
         try{
             Class.forName("com.mysql.jdbc.Driver");
-            Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/spm","root","");
+           Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12369942","sql12369942","5g6lr3KRxN");
             String sql = "SELECT * FROM buildings";
             PreparedStatement pstmt = (PreparedStatement) conn.prepareStatement(sql);
             ResultSet rs = pstmt.executeQuery();
@@ -73,8 +73,7 @@ public class LocationInsert extends javax.swing.JFrame {
         }
         catch(Exception e){
             JOptionPane.showMessageDialog(null,e);
-        } 
-       
+        }      
     }
     
 
@@ -114,6 +113,9 @@ public class LocationInsert extends javax.swing.JFrame {
         addRoom = new javax.swing.JButton();
         generated_name = new javax.swing.JTextField();
         addRoom1 = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        room_del_id = new javax.swing.JTextField();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -129,6 +131,23 @@ public class LocationInsert extends javax.swing.JFrame {
         });
 
         jLabel2.setText("Number of Floors");
+
+        no_of_floors.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                no_of_floorsKeyPressed(evt);
+            }
+        });
+
+        common_search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                common_searchActionPerformed(evt);
+            }
+        });
+        common_search.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                common_searchKeyReleased(evt);
+            }
+        });
 
         search_btn.setBackground(new java.awt.Color(0, 102, 204));
         search_btn.setForeground(new java.awt.Color(255, 255, 255));
@@ -279,6 +298,28 @@ public class LocationInsert extends javax.swing.JFrame {
             }
         });
 
+        jLabel7.setText("Enter room id to delete");
+
+        room_del_id.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                room_del_idActionPerformed(evt);
+            }
+        });
+        room_del_id.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                room_del_idKeyPressed(evt);
+            }
+        });
+
+        jButton3.setBackground(new java.awt.Color(255, 0, 0));
+        jButton3.setForeground(new java.awt.Color(255, 255, 255));
+        jButton3.setText("Delete");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -329,26 +370,34 @@ public class LocationInsert extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(room_building, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(floor_limit, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
-                                                .addComponent(addRoom, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(floor_limit, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(generated_name, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(18, 18, 18)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 205, Short.MAX_VALUE)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel6)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                .addComponent(jLabel5)
-                                                .addGap(39, 39, 39)))
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jLabel6)
+                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                    .addComponent(jLabel5)
+                                                    .addGap(39, 39, 39)))
+                                            .addComponent(jLabel7))
                                         .addGap(73, 73, 73)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(room_type, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(time_slot, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(room_type, 0, 191, Short.MAX_VALUE)
+                                            .addComponent(time_slot, 0, 191, Short.MAX_VALUE)
+                                            .addComponent(room_del_id)))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(303, 303, 303)
                                         .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(0, 0, Short.MAX_VALUE)))))
-                        .addContainerGap(160, Short.MAX_VALUE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(addRoom, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(46, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2))
@@ -394,8 +443,8 @@ public class LocationInsert extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(generated_name, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(addRoom1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -410,8 +459,15 @@ public class LocationInsert extends javax.swing.JFrame {
                                     .addComponent(time_slot, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(addRoom, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 55, Short.MAX_VALUE)))
+                                .addComponent(addRoom, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(16, 16, 16)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(room_del_id, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -429,27 +485,34 @@ public class LocationInsert extends javax.swing.JFrame {
         String s = dtf.format(now);
         System.out.println(s);
         
-        try{
+        String building = building_name.getText();
         
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/spm","root","");
-            String query="INSERT INTO buildings (building_name, no_of_floors, created) VALUES('"+building_name.getText()+"',"+no_of_floors.getText()+", '"+s+"')";
-            Statement st=conn.createStatement();
-            st.executeUpdate(query);
-          
-            DisplayTable();
-           
+   
+        if(building.isEmpty()) {
+            JOptionPane.showMessageDialog(null,"Please enter a building name");
+        } else {
+            try{
+
+                Class.forName("com.mysql.jdbc.Driver");
+               Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12369942","sql12369942","5g6lr3KRxN");
+                String query="INSERT INTO buildings (building_name, no_of_floors, created) VALUES('"+building_name.getText()+"',"+no_of_floors.getText()+", '"+s+"')";
+                Statement st=conn.createStatement();
+                st.executeUpdate(query);
+                room_building.addItem(building_name.getText());
+                DisplayTable();  
+            }
+            catch(Exception e){
+                JOptionPane.showMessageDialog(null,e);
+            } 
         }
-        catch(Exception e){
-            JOptionPane.showMessageDialog(null,e);
-        }    
+       
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void DisplayTable()
     {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/spm","root","");
+           Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12369942","sql12369942","5g6lr3KRxN");
             String sql = "select * from buildings";
             PreparedStatement pstmt = (PreparedStatement) conn.prepareStatement(sql);
             ResultSet rs = pstmt.executeQuery();
@@ -473,7 +536,7 @@ public class LocationInsert extends javax.swing.JFrame {
     {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/spm","root","");
+           Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12369942","sql12369942","5g6lr3KRxN");
             String sql = "select * from rooms";
             PreparedStatement pstmt = (PreparedStatement) conn.prepareStatement(sql);
             ResultSet rs = pstmt.executeQuery();
@@ -502,7 +565,7 @@ public class LocationInsert extends javax.swing.JFrame {
             int word_length = search_word.length();
             if(word_length > 0) {
                 Class.forName("com.mysql.jdbc.Driver");
-                Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/spm","root","");
+               Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12369942","sql12369942","5g6lr3KRxN");
                 String sql = "SELECT * FROM buildings where building_name = '"+search_word+"' ";
                 PreparedStatement pstmt = (PreparedStatement) conn.prepareStatement(sql);
                 ResultSet rs = pstmt.executeQuery();
@@ -524,13 +587,13 @@ public class LocationInsert extends javax.swing.JFrame {
 
                 while(rs2.next())
                 {
-                    Object o[] = {rs2.getString("id"),rs2.getString("building_name"),rs2.getString("room_type"), rs2.getString("non_available_time"), rs2.getString("created")};
+                    Object o[] = {rs2.getString("id"),rs2.getString("room_name"),rs2.getString("building_name"),rs2.getString("room_type"), rs2.getString("non_available_time"), rs2.getString("created")};
                     rooms_tablee.addRow(o);
                 }
             } else {
                 System.out.println("Yes this is workinh");
                 Class.forName("com.mysql.jdbc.Driver");
-                Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/spm","root","");
+               Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12369942","sql12369942","5g6lr3KRxN");
                 String sql = "SELECT * FROM buildings";
                 PreparedStatement pstmt = (PreparedStatement) conn.prepareStatement(sql);
                 ResultSet rs = pstmt.executeQuery();
@@ -551,7 +614,7 @@ public class LocationInsert extends javax.swing.JFrame {
 
                 while(rs2.next())
                 {
-                    Object o[] = {rs2.getString("id"),rs2.getString("building_name"),rs2.getString("room_type"), rs2.getString("non_available_time"), rs2.getString("created")};
+                    Object o[] = {rs2.getString("id"),rs2.getString("room_name"),rs2.getString("building_name"),rs2.getString("room_type"), rs2.getString("non_available_time"), rs2.getString("created")};
                     rooms_tablee.addRow(o);
                 }
                 
@@ -575,7 +638,7 @@ public class LocationInsert extends javax.swing.JFrame {
         try{
         
         Class.forName("com.mysql.jdbc.Driver");
-        Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/spm","root","");
+       Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12369942","sql12369942","5g6lr3KRxN");
         String query="DELETE FROM buildings WHERE id = "+delete_building.getText();
         Statement st=conn.createStatement();
         st.executeUpdate(query);
@@ -590,7 +653,7 @@ public class LocationInsert extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/spm","root","");
+           Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12369942","sql12369942","5g6lr3KRxN");
 
             TableModel model = buildings_table.getModel();
             int i = buildings_table.getSelectedRow();
@@ -627,7 +690,7 @@ public class LocationInsert extends javax.swing.JFrame {
         
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/spm","root","");
+           Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12369942","sql12369942","5g6lr3KRxN");
             String sql = "UPDATE buildings set building_name = '"+building+"', no_of_floors = "+floors+" where id = "+common_id;
             PreparedStatement pstmt = (PreparedStatement) conn.prepareStatement(sql);
             pstmt.execute();
@@ -653,7 +716,7 @@ public class LocationInsert extends javax.swing.JFrame {
         
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/spm","root","");
+           Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12369942","sql12369942","5g6lr3KRxN");
             
             String sql="SELECT * FROM buildings where building_name = '"+sem+"' ";
             PreparedStatement pstmt = (PreparedStatement) conn.prepareStatement(sql);
@@ -726,7 +789,7 @@ public class LocationInsert extends javax.swing.JFrame {
             room_name = generated_name.getText();
         
             Class.forName("com.mysql.jdbc.Driver");
-            Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/spm","root","");
+           Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12369942","sql12369942","5g6lr3KRxN");
             String query="INSERT INTO rooms (building_name,room_name,  room_type, non_available_time, created) VALUES('"+building+"','"+room_name+"','"+type+"','"+time+"','"+s+"')";
             Statement st=conn.createStatement();
             st.executeUpdate(query);
@@ -771,12 +834,133 @@ public class LocationInsert extends javax.swing.JFrame {
             System.out.println(room_name);
         }
         
-        generated_name.setText(room_name);
-        
-        
-        
-        
+        generated_name.setText(room_name);                    
     }//GEN-LAST:event_addRoom1ActionPerformed
+
+    private void common_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_common_searchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_common_searchActionPerformed
+
+    private void common_searchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_common_searchKeyReleased
+           // TODO add your handling code here:
+           System.out.println(common_search.getText());
+           // TODO add your handling code here:
+         
+        try {
+            String search_word = common_search.getText();
+            System.out.println(search_word);
+            int word_length = search_word.length();
+            if(word_length > 0) {
+                Class.forName("com.mysql.jdbc.Driver");
+               Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12369942","sql12369942","5g6lr3KRxN");
+                String sql = "SELECT * FROM buildings where building_name LIKE '"+search_word+"%' ";
+                PreparedStatement pstmt = (PreparedStatement) conn.prepareStatement(sql);
+                ResultSet rs = pstmt.executeQuery();
+                DefaultTableModel building_table = (DefaultTableModel) buildings_table.getModel();
+                building_table.setRowCount(0);
+
+                while(rs.next())
+                {
+                    Object o[] = {rs.getString("id"),rs.getString("building_name"), rs.getString("no_of_floors"), rs.getString("created")};
+                    building_table.addRow(o);
+                }
+                
+                
+                String sql2 = "SELECT * FROM rooms where building_name LIKE '"+search_word+"%' ";
+                PreparedStatement pstmt2 = (PreparedStatement) conn.prepareStatement(sql2);
+                ResultSet rs2 = pstmt2.executeQuery();
+                DefaultTableModel rooms_tablee = (DefaultTableModel) rooms_table.getModel();
+                rooms_tablee.setRowCount(0);
+
+                while(rs2.next())
+                {
+                    Object o[] = {rs2.getString("id"),rs2.getString("room_name"),rs2.getString("building_name"),rs2.getString("room_type"), rs2.getString("non_available_time"), rs2.getString("created")};
+                    rooms_tablee.addRow(o);
+                }
+            } else {
+                System.out.println("Yes this is workinh");
+                Class.forName("com.mysql.jdbc.Driver");
+               Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12369942","sql12369942","5g6lr3KRxN");
+                String sql = "SELECT * FROM buildings";
+                PreparedStatement pstmt = (PreparedStatement) conn.prepareStatement(sql);
+                ResultSet rs = pstmt.executeQuery();
+                DefaultTableModel building_table = (DefaultTableModel) buildings_table.getModel();
+                building_table.setRowCount(0);
+
+                while(rs.next())
+                {
+                    Object o[] = {rs.getString("id"),rs.getString("building_name"), rs.getString("no_of_floors"), rs.getString("created")};
+                    building_table.addRow(o);
+                }
+                
+                String sql2 = "SELECT * FROM rooms";
+                PreparedStatement pstmt2 = (PreparedStatement) conn.prepareStatement(sql2);
+                ResultSet rs2 = pstmt2.executeQuery();
+                DefaultTableModel rooms_tablee = (DefaultTableModel) rooms_table.getModel();
+                rooms_tablee.setRowCount(0);
+
+                while(rs2.next())
+                {
+                    Object o[] = {rs2.getString("id"),rs2.getString("room_name"),rs2.getString("building_name"),rs2.getString("room_type"), rs2.getString("non_available_time"), rs2.getString("created")};
+                    rooms_tablee.addRow(o);
+                }
+                
+                
+            }
+//            buildings_table.setModel(DbUtils.resultSetToTableModel(rs));
+            
+        }
+        catch(Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_common_searchKeyReleased
+
+    private void room_del_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_room_del_idActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_room_del_idActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        System.out.println(room_del_id.getText());
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+               Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12369942","sql12369942","5g6lr3KRxN");
+                String sql = "delete from rooms where id = '"+room_del_id.getText()+"'";
+                PreparedStatement pstmt = (PreparedStatement) conn.prepareStatement(sql);
+                pstmt.executeUpdate(sql);
+//                JOptionPane.showMessageDialog(null, "Room with id " + room_del_id + " deleted");
+                
+                DisplayTableRooms();
+                
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog(null, "Invalid room id");
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void no_of_floorsKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_no_of_floorsKeyPressed
+        // TODO add your handling code here:
+        
+            char c=evt.getKeyChar();
+            if(Character.isLetter(c)){
+
+                no_of_floors.setEditable(false);
+
+            }else{
+                no_of_floors.setEditable(true);
+            }
+    }//GEN-LAST:event_no_of_floorsKeyPressed
+
+    private void room_del_idKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_room_del_idKeyPressed
+        // TODO add your handling code here:
+         char c=evt.getKeyChar();
+            if(Character.isLetter(c)){
+
+                room_del_id.setEditable(false);
+
+            }else{
+                room_del_id.setEditable(true);
+            }
+    }//GEN-LAST:event_room_del_idKeyPressed
 
     /**
      * @param args the command line arguments
@@ -825,18 +1009,21 @@ public class LocationInsert extends javax.swing.JFrame {
     private javax.swing.JTextField generated_name;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField no_of_floors;
     private javax.swing.JComboBox<String> room_building;
+    private javax.swing.JTextField room_del_id;
     private javax.swing.JComboBox<String> room_type;
     private javax.swing.JTable rooms_table;
     private javax.swing.JButton search_btn;

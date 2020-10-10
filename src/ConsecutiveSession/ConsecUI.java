@@ -5,6 +5,7 @@
  */
 package ConsecutiveSession;
 
+import HomeUI.HomePageUI;
 import com.mysql.jdbc.PreparedStatement;
 import group.Grpdetails;
 import java.sql.Connection;
@@ -12,6 +13,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -38,7 +40,7 @@ public class ConsecUI extends javax.swing.JFrame {
     private void lecturedrop(){
           try{
             Class.forName("com.mysql.jdbc.Driver");
-         Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
+        Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12369942","sql12369942","5g6lr3KRxN");
             String sql = "SELECT sessionTot FROM session";
             PreparedStatement pstmt = (PreparedStatement) conn.prepareStatement(sql);
             ResultSet rs = pstmt.executeQuery();
@@ -56,7 +58,7 @@ public class ConsecUI extends javax.swing.JFrame {
     private void labdrop(){
           try{
             Class.forName("com.mysql.jdbc.Driver");
-         Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
+        Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12369942","sql12369942","5g6lr3KRxN");
             String sql = "SELECT sessionTot FROM session";
             PreparedStatement pstmt = (PreparedStatement) conn.prepareStatement(sql);
             ResultSet rs = pstmt.executeQuery();
@@ -74,7 +76,7 @@ public class ConsecUI extends javax.swing.JFrame {
       private void tutorialdrop(){
           try{
             Class.forName("com.mysql.jdbc.Driver");
-         Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
+        Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12369942","sql12369942","5g6lr3KRxN");
                 String q="Tutorial";
             String sql = "SELECT sessionTot FROM session";
             PreparedStatement pstmt = (PreparedStatement) conn.prepareStatement(sql);
@@ -125,6 +127,7 @@ public class ConsecUI extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         Delete = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -184,7 +187,7 @@ public class ConsecUI extends javax.swing.JFrame {
         jLabel1.setText("Lab");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jLabel5.setText("Lecturer ");
+        jLabel5.setText("Tutorial");
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel6.setText("Lecturer ");
@@ -193,6 +196,15 @@ public class ConsecUI extends javax.swing.JFrame {
         Delete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 DeleteActionPerformed(evt);
+            }
+        });
+
+        jButton3.setBackground(new java.awt.Color(0, 0, 204));
+        jButton3.setForeground(new java.awt.Color(240, 240, 240));
+        jButton3.setText("Home");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
             }
         });
 
@@ -227,7 +239,9 @@ public class ConsecUI extends javax.swing.JFrame {
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 543, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
-                                .addComponent(Delete)))))
+                                .addComponent(Delete)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton3)))))
                 .addGap(51, 51, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -257,7 +271,8 @@ public class ConsecUI extends javax.swing.JFrame {
                 .addGap(79, 79, 79)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(add)
-                    .addComponent(Delete))
+                    .addComponent(Delete)
+                    .addComponent(jButton3))
                 .addContainerGap(179, Short.MAX_VALUE))
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -277,11 +292,16 @@ public class ConsecUI extends javax.swing.JFrame {
             ttutorial = tutorial.getSelectedItem().toString();
            Class.forName("com.mysql.jdbc.Driver");
            
-         Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
+        Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12369942","sql12369942","5g6lr3KRxN");
+            if( lec.isEmpty() || labb.isEmpty() || ttutorial.isEmpty()  ){
+                String message="All Field Should be filled";
+                 JOptionPane.showMessageDialog(new JFrame(), message, "Dialog",
+                JOptionPane.ERROR_MESSAGE);
+            }else{
             String query="insert into csessions (lecture,lab,tutorial)VALUES('"+lec+"','"+labb+"','"+ttutorial+"')";
             java.sql.PreparedStatement pst=conn.prepareStatement(query);
              pst.executeUpdate();
-           
+            }
            DefaultTableModel model=(DefaultTableModel)csessiontab.getModel();
             model.setRowCount(0);
             showcsec();
@@ -306,7 +326,7 @@ public class ConsecUI extends javax.swing.JFrame {
          try{
            Class.forName("com.mysql.jdbc.Driver");
            
-         Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
+        Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12369942","sql12369942","5g6lr3KRxN");
                   //   Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/spm","root","");
 
            int row=csessiontab.getSelectedRow();
@@ -329,12 +349,18 @@ public class ConsecUI extends javax.swing.JFrame {
         
     }//GEN-LAST:event_DeleteActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        HomePageUI home =new HomePageUI();
+        home.setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
      public ArrayList<Consecsession> csessiondetailsretrieve(){
     ArrayList<Consecsession> sessionlist=new ArrayList<>();
      try{
            Class.forName("com.mysql.jdbc.Driver");
            
-         Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
+        Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12369942","sql12369942","5g6lr3KRxN");
                 //     Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/spm","root","");
 
           String query="select * from csessions";
@@ -418,6 +444,7 @@ public class ConsecUI extends javax.swing.JFrame {
     private javax.swing.JButton Delete;
     private javax.swing.JButton add;
     private javax.swing.JTable csessiontab;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

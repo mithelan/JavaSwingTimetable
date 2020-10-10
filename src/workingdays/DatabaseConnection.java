@@ -21,7 +21,7 @@ import javax.swing.JOptionPane;
          try{
            Class.forName("com.mysql.jdbc.Driver");
            
-            Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
+           Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12369942","sql12369942","5g6lr3KRxN");
 
            Statement st = conn.createStatement();
           st.execute(query);
@@ -37,7 +37,7 @@ import javax.swing.JOptionPane;
          try{
            Class.forName("com.mysql.jdbc.Driver");
            
-           Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
+          Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12369942","sql12369942","5g6lr3KRxN");
 
            Statement st = conn.createStatement();
       st.executeUpdate(query);
@@ -53,7 +53,7 @@ import javax.swing.JOptionPane;
          try{
            Class.forName("com.mysql.jdbc.Driver");
            
-     Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
+    Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12369942","sql12369942","5g6lr3KRxN");
 
         Statement statement = conn.createStatement();
  

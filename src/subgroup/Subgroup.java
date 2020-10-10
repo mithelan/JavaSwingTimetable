@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -36,7 +37,7 @@ public class Subgroup extends javax.swing.JFrame {
      try{
            Class.forName("com.mysql.jdbc.Driver");
            
-         Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
+        Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12369942","sql12369942","5g6lr3KRxN");
           String query="select * from subgroup";
           Statement st=conn.createStatement();
           ResultSet rs=st.executeQuery(query);
@@ -243,7 +244,7 @@ public class Subgroup extends javax.swing.JFrame {
           try{
            Class.forName("com.mysql.jdbc.Driver");
            
-         Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
+        Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12369942","sql12369942","5g6lr3KRxN");
            int row=subtable.getSelectedRow();
            String value=(subtable.getModel().getValueAt(row, 0).toString());
            String query="delete from subgroup where id="+value;
@@ -275,14 +276,19 @@ public class Subgroup extends javax.swing.JFrame {
         try{
            Class.forName("com.mysql.jdbc.Driver");
            
-         Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
+        Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12369942","sql12369942","5g6lr3KRxN");
             String query="insert into subgroup (subgrpid) values (?)";
             PreparedStatement pst=conn.prepareStatement(query);
             pst.setString(1, subgrp.getText());
            
-           
+            if( subgrp.getText().isEmpty()  ){
+                String message="All Field Should be filled";
+                 JOptionPane.showMessageDialog(new JFrame(), message, "Dialog",
+                JOptionPane.ERROR_MESSAGE);
+            }else{
            
             pst.executeUpdate();
+            }
             DefaultTableModel model=(DefaultTableModel)subtable.getModel();
             model.setRowCount(0);
             showsubgroup();
@@ -300,7 +306,7 @@ public class Subgroup extends javax.swing.JFrame {
          try{
            Class.forName("com.mysql.jdbc.Driver");
            
-         Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
+        Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12369942","sql12369942","5g6lr3KRxN");
            int row=subtable.getSelectedRow();
            String value=(subtable.getModel().getValueAt(row, 0).toString());
            String query="UPDATE subgroup SET subgrpid=? where id="+value;

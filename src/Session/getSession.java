@@ -34,7 +34,7 @@ public class getSession extends javax.swing.JFrame {
         try {
             Class.forName("com.mysql.jdbc.Driver");
 
-        Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
+       Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12369942","sql12369942","5g6lr3KRxN");
 
             String query = "select * from session";
             Statement st = conn.createStatement();
@@ -267,7 +267,7 @@ public class getSession extends javax.swing.JFrame {
         
         try{
             Class.forName("com.mysql.jdbc.Driver");
-             Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
+            Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12369942","sql12369942","5g6lr3KRxN");
             String query = "select * from session where id= "+model.getValueAt(i,0);
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
@@ -313,7 +313,7 @@ public class getSession extends javax.swing.JFrame {
             int word_length = search_word.length();
             if(word_length > 0) {
                 Class.forName("com.mysql.jdbc.Driver");
-                Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
+               Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12369942","sql12369942","5g6lr3KRxN");
                 String sql = "SELECT * FROM session where id LIKE '"+search_word+"%' ";
                 PreparedStatement pstmt = (PreparedStatement) conn.prepareStatement(sql);
                 ResultSet rs = pstmt.executeQuery();
@@ -333,7 +333,7 @@ public class getSession extends javax.swing.JFrame {
             } else {
                 System.out.println("Yes this is workinh");
                 Class.forName("com.mysql.jdbc.Driver");
-              Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
+             Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12369942","sql12369942","5g6lr3KRxN");
                 String sql = "SELECT * FROM session";
                 PreparedStatement pstmt = (PreparedStatement) conn.prepareStatement(sql);
                 ResultSet rs = pstmt.executeQuery();

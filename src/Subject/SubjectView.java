@@ -38,7 +38,7 @@ public class SubjectView extends javax.swing.JFrame {
          try{
             Class.forName("com.mysql.jdbc.Driver");
 
-            Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
+           Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12369942","sql12369942","5g6lr3KRxN");
     
             String query="select * from subjectnew";
             Statement st=conn.createStatement();
@@ -473,7 +473,7 @@ public class SubjectView extends javax.swing.JFrame {
           try{
             Class.forName("com.mysql.jdbc.Driver");
 
-        Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
+       Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12369942","sql12369942","5g6lr3KRxN");
             
             int row =subjectTable.getSelectedRow();
             
@@ -515,7 +515,7 @@ public class SubjectView extends javax.swing.JFrame {
           try{
            Class.forName("com.mysql.jdbc.Driver");
 
-            Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
+           Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12369942","sql12369942","5g6lr3KRxN");
            int row=subjectTable.getSelectedRow();
            String value=(subjectTable.getModel().getValueAt(row,8).toString());
            String query="delete from subjectnew where id="+value;

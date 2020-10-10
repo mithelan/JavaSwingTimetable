@@ -34,7 +34,9 @@ public class LecturerView extends javax.swing.JFrame {
         
         try{
             Class.forName("com.mysql.jdbc.Driver");
-           Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
+
+             Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12369942","sql12369942","5g6lr3KRxN");
+         
             Statement st=conn.createStatement();
             String selectQuery="select building_name from buildings";
             ResultSet rs=st.executeQuery(selectQuery);
@@ -54,7 +56,7 @@ public class LecturerView extends javax.swing.JFrame {
         try {
             Class.forName("com.mysql.jdbc.Driver");
 
-           Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
+      Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12369942","sql12369942","5g6lr3KRxN");
 
             String query = "select * from lecturernew";
             Statement st = conn.createStatement();
@@ -401,7 +403,7 @@ public class LecturerView extends javax.swing.JFrame {
         try {
             Class.forName("com.mysql.jdbc.Driver");
 
-          Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
+        Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12369942","sql12369942","5g6lr3KRxN");
 
             int row = jTable_display.getSelectedRow();
             String value = (jTable_display.getModel().getValueAt(row, 2).toString());
@@ -543,20 +545,20 @@ public class LecturerView extends javax.swing.JFrame {
                 level.setSelectedIndex(1);
                 break;
 
-            case "Senior Lecturer(HG)":
+            case "3":
                 level.setSelectedIndex(2);
                 break;
-            case " Senior Lecturer":
+            case "4":
                 level.setSelectedIndex(3);
                 break;
-            case "Lecutuer":
+            case "5":
                 level.setSelectedIndex(4);
                 break;
 
-            case "Instructor":
+            case "6":
                 level.setSelectedIndex(5);
                 break;
-            case "Assitant Instructor":
+            case "7":
                 level.setSelectedIndex(6);
                 break;
 
@@ -574,7 +576,7 @@ public class LecturerView extends javax.swing.JFrame {
         try {
             Class.forName("com.mysql.jdbc.Driver");
 
-         Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
+       Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12369942","sql12369942","5g6lr3KRxN");
             int row = jTable_display.getSelectedRow();
             String value = (jTable_display.getModel().getValueAt(row, 2).toString());
             String query = "delete from lecturernew where empid=" + value;

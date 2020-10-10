@@ -5,6 +5,7 @@
  */
 package subgrpgenerate;
 
+import HomeUI.HomePageUI;
 import grpgenerate.Grpidgen;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -12,6 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -30,14 +32,45 @@ public class subgroupidgen extends javax.swing.JFrame {
         initComponents();
         showgenerationsub();
         tutorialdrop();
+        tutorialdrop1();
     }
 
+     private void tutorialdrop1(){
+          try{
+            Class.forName("com.mysql.jdbc.Driver");
+        Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12369942","sql12369942","5g6lr3KRxN");
+                String q="Tutorial";
+            String sql = "SELECT subgrpid FROM subgroup";
+            com.mysql.jdbc.PreparedStatement pstmt = (com.mysql.jdbc.PreparedStatement) conn.prepareStatement(sql);
+            ResultSet rs = pstmt.executeQuery();
+           
+            while(rs.next())
+            {
+                subgroup.addItem(rs.getString("subgrpid"));             
+            }
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null,e);
+        } 
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
           private void tutorialdrop(){
           try{
             Class.forName("com.mysql.jdbc.Driver");
-         Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
+        Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12369942","sql12369942","5g6lr3KRxN");
                 String q="Tutorial";
             String sql = "SELECT grpidg FROM grpidgen";
             com.mysql.jdbc.PreparedStatement pstmt = (com.mysql.jdbc.PreparedStatement) conn.prepareStatement(sql);
@@ -71,7 +104,7 @@ public class subgroupidgen extends javax.swing.JFrame {
      try{
            Class.forName("com.mysql.jdbc.Driver");
            
-         Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
+        Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12369942","sql12369942","5g6lr3KRxN");
           String query="select * from subgrpidgen";
           Statement st=conn.createStatement();
           ResultSet rs=st.executeQuery(query);
@@ -241,9 +274,9 @@ public void showgenerationsub(){
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(51, 51, 51)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(subgroup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(group, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(group, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(subgroup, 0, 99, Short.MAX_VALUE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addComponent(delete)
@@ -293,7 +326,7 @@ public void showgenerationsub(){
          try{
            Class.forName("com.mysql.jdbc.Driver");
            
-         Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
+        Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12369942","sql12369942","5g6lr3KRxN");
             String query="insert into subgrpidgen (subgrpidg) values (?)";
             PreparedStatement pst=conn.prepareStatement(query);
            
@@ -304,7 +337,13 @@ public void showgenerationsub(){
             String generated_id;
             generated_id=grp+"."+subgrp+" ";
             pst.setString(1, generated_id);
+             if( grp.isEmpty() || subgrp.isEmpty()  ){
+                String message="All Field Should be filled";
+                 JOptionPane.showMessageDialog(new JFrame(), message, "Dialog",
+                JOptionPane.ERROR_MESSAGE);
+            }else{
             pst.executeUpdate();
+             }
             DefaultTableModel model=(DefaultTableModel)subgeneration.getModel();
             model.setRowCount(0);
             showgenerationsub();
@@ -332,7 +371,7 @@ public void showgenerationsub(){
          try{
            Class.forName("com.mysql.jdbc.Driver");
            
-         Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
+        Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12369942","sql12369942","5g6lr3KRxN");
            int row=subgeneration.getSelectedRow();
            String value=(subgeneration.getModel().getValueAt(row, 0).toString());
            String query="delete from subgrpidgen where id="+value;
@@ -352,7 +391,7 @@ public void showgenerationsub(){
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        Home home =new Home();
+        HomePageUI home =new HomePageUI();
         home.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 

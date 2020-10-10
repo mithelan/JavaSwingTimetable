@@ -37,7 +37,7 @@ public class WorkingDaysView extends javax.swing.JFrame {
         try {
             Class.forName("com.mysql.jdbc.Driver");
 
-            Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
+           Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12369942","sql12369942","5g6lr3KRxN");
 
             Statement statement = conn.createStatement();
 
@@ -58,7 +58,7 @@ public class WorkingDaysView extends javax.swing.JFrame {
         try {
             Class.forName("com.mysql.jdbc.Driver");
 
-            Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
+           Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12369942","sql12369942","5g6lr3KRxN");
 
             Statement statement = conn.createStatement();
 
@@ -100,7 +100,7 @@ public class WorkingDaysView extends javax.swing.JFrame {
         try {
             Class.forName("com.mysql.jdbc.Driver");
 
-              Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
+             Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12369942","sql12369942","5g6lr3KRxN");
 
             Statement statement = conn.createStatement();
 
@@ -129,7 +129,7 @@ public class WorkingDaysView extends javax.swing.JFrame {
         try {
             Class.forName("com.mysql.jdbc.Driver");
 
-              Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
+             Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12369942","sql12369942","5g6lr3KRxN");
 
             Statement statement = conn.createStatement();
 
@@ -408,9 +408,8 @@ public class WorkingDaysView extends javax.swing.JFrame {
                 System.out.println(e);
             }
             
-            
-          conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12367729","sql12367729","zWmfRFXCpe");
-
+            conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12369942","sql12369942","5g6lr3KRxN");
+        
             System.out.println("Connection is created successfully:");
             stmt = (Statement) conn.createStatement();
 

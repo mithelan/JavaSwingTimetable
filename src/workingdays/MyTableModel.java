@@ -52,7 +52,7 @@ class MyTableModel extends AbstractTableModel {
     public void removeAllEntry(){
 
             tableData.clear();
-        model.fireTableDataChanged();
+        //model.fireTableDataChanged();
     }
 
     /*

@@ -10,6 +10,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartFrame;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.general.DefaultPieDataset;
 
 /**
  *
@@ -22,36 +27,7 @@ public class statsui extends javax.swing.JFrame {
      */
     public statsui() {
         initComponents();
-        try{
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/spm","root","");
-            String sql = "SELECT *  FROM wwwq";
-            PreparedStatement pstmt = (PreparedStatement) conn.prepareStatement(sql);
-            ResultSet rs = pstmt.executeQuery();
-            
-            String subject = "SELECT *  FROM subject";
-            PreparedStatement pstmt2 = (PreparedStatement) conn.prepareStatement(subject);
-            ResultSet rs2 = pstmt2.executeQuery();
-            
-            int x = 0;
-            while(rs.next())
-            {
-                  x++;         
-            }
-            
-            int y = 0;
-            while(rs2.next())
-            {
-                  y++;         
-            }
-            
-            no_of_lecture.setText(x + "");
-            no_of_subjects.setText(y + "");
-            
-        }
-        catch(Exception e){
-            JOptionPane.showMessageDialog(null,e);
-        } 
+        
     }
 
     /**
@@ -65,12 +41,12 @@ public class statsui extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        no_of_lecture = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        no_of_subjects = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         no_of_subjects1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 51, 0));
@@ -89,21 +65,29 @@ public class statsui extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tw Cen MT", 0, 48)); // NOI18N
         jLabel1.setText("Statistics");
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel2.setText("Number of Lectures");
-
-        no_of_lecture.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        no_of_lecture.setText("no_of_lectures");
-
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
 
-        no_of_subjects.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        no_of_subjects.setText("no_of_subjects");
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel4.setText("Number of Subjects");
-
         no_of_subjects1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+
+        jButton1.setText("SHOW");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel6.setText("Lectures in each faculties");
+
+        jButton2.setText("SHOW");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel7.setText("Lectures in each centers");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -111,56 +95,213 @@ public class statsui extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(54, 54, 54))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(93, 93, 93)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(193, 193, 193)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(no_of_lecture, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(no_of_subjects1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 153, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(no_of_subjects1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(287, 287, 287)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)))
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(187, 187, 187))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(89, 89, 89)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(no_of_subjects, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(190, 190, 190)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(586, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(197, 197, 197)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(579, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(no_of_lecture, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(52, 52, 52)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(no_of_subjects, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(52, 52, 52)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(15, 15, 15)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(48, 48, 48)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(no_of_subjects1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(266, Short.MAX_VALUE))
+                .addContainerGap(250, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(104, 104, 104)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(393, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(176, 176, 176)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(321, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+            
+        int computing_lectures = 0;  
+        int engineering_lectures = 0; 
+        int business_lectures = 0; 
+        int humanities_lectures = 0; 
+        try{
+        Class.forName("com.mysql.jdbc.Driver");
+       Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12369942","sql12369942","5g6lr3KRxN");
+        String sql = "SELECT *  FROM lecturernew where faculty = 'Computing'";
+        PreparedStatement pstmt = (PreparedStatement) conn.prepareStatement(sql);
+        ResultSet computing = pstmt.executeQuery();
+        
+        String sql2 = "SELECT *  FROM lecturernew where faculty = 'Business'";
+        PreparedStatement pstmt2 = (PreparedStatement) conn.prepareStatement(sql2);
+        ResultSet business = pstmt2.executeQuery();
+
+        String sql3 = "SELECT *  FROM lecturernew where faculty = 'Engineering'";
+        PreparedStatement pstmt3 = (PreparedStatement) conn.prepareStatement(sql3);
+        ResultSet engineering = pstmt3.executeQuery();
+        
+        String sql4 = "SELECT *  FROM lecturernew where faculty = 'Humanities & Sciences'";
+        PreparedStatement pstmt4 = (PreparedStatement) conn.prepareStatement(sql4);
+        ResultSet humanity = pstmt4.executeQuery();
+       
+        while(computing.next()) {
+            computing_lectures++;
+        }
+        
+        while(business.next()) {
+            business_lectures++;
+        }
+        
+        while(engineering.next()) {
+            engineering_lectures++;
+        }
+        
+        while(humanity.next()) {
+            humanities_lectures++;
+        }
+            
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null,e);
+        } 
+            
+        DefaultPieDataset dataset = new DefaultPieDataset();
+        
+        dataset.setValue("Computing", new Integer(computing_lectures));
+        dataset.setValue("Business", new Integer(business_lectures));
+        dataset.setValue("Engineering", new Integer(engineering_lectures));
+        dataset.setValue("Humanities & Sciences", new Integer(humanities_lectures));
+
+        JFreeChart chart = ChartFactory.createPieChart("Lectures for Faculties", dataset, true, true, true);
+        ChartFrame yourFrame = new ChartFrame("Lectures for Faculties", chart);
+        yourFrame.setSize(600, 600);
+
+        yourFrame.setVisible(true);
+       
+            
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        int malabe = 0;  
+        int metro = 0; 
+        int matara = 0; 
+        int kandy = 0;
+        int kurunagala = 0;
+        int jaffna = 0;
+        
+        try{
+        Class.forName("com.mysql.jdbc.Driver");
+       Connection conn=DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12369942","sql12369942","5g6lr3KRxN");
+        String sql = "SELECT *  FROM lecturernew where center = 'Malabe'";
+        PreparedStatement pstmt = (PreparedStatement) conn.prepareStatement(sql);
+        ResultSet malabe_lecs = pstmt.executeQuery();
+        
+        String sql2 = "SELECT *  FROM lecturernew where center = 'Metro'";
+        PreparedStatement pstmt2 = (PreparedStatement) conn.prepareStatement(sql2);
+        ResultSet metro_lecs = pstmt2.executeQuery();
+
+        String sql3 = "SELECT *  FROM lecturernew where center = 'Kandy'";
+        PreparedStatement pstmt3 = (PreparedStatement) conn.prepareStatement(sql3);
+        ResultSet kandy_lecs = pstmt3.executeQuery();
+        
+        String sql4 = "SELECT *  FROM lecturernew where center = 'Matara'";
+        PreparedStatement pstmt4 = (PreparedStatement) conn.prepareStatement(sql4);
+        ResultSet matara_lecs = pstmt4.executeQuery();
+        
+        String sql5 = "SELECT *  FROM lecturernew where center = 'Kurunagala'";
+        PreparedStatement pstmt5 = (PreparedStatement) conn.prepareStatement(sql5);
+        ResultSet kurunagala_lecs = pstmt5.executeQuery();
+        
+        String sql6 = "SELECT *  FROM lecturernew where center = 'Jaffna'";
+        PreparedStatement pstmt6 = (PreparedStatement) conn.prepareStatement(sql6);
+        ResultSet jaffna_lecs = pstmt6.executeQuery();
+       
+        while(malabe_lecs.next()) {
+            malabe++;
+        }
+        
+        while(metro_lecs.next()) {
+            metro++;
+        }
+        
+        while(kandy_lecs.next()) {
+            kandy++;
+        }
+        
+        while(matara_lecs.next()) {
+            matara++;
+        }
+        
+        while(kurunagala_lecs.next()) {
+            kurunagala++;
+        }       
+          
+        while(jaffna_lecs.next()) {
+            jaffna++;
+        }  
+            
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null,e);
+        } 
+            
+        DefaultPieDataset dataset = new DefaultPieDataset();
+        
+        dataset.setValue("Malabe", new Integer(malabe));
+        dataset.setValue("Metro", new Integer(metro));
+        dataset.setValue("Kandy", new Integer(kandy));
+        dataset.setValue("Matara", new Integer(matara));
+        dataset.setValue("Kurunagala", new Integer(kurunagala));
+        dataset.setValue("Jaffna", new Integer(jaffna));
+
+        JFreeChart chart = ChartFactory.createPieChart("Lectures for Centers", dataset, true, true, true);
+        ChartFrame yourFrame = new ChartFrame("Lectures for Centers", chart);
+        yourFrame.setSize(600, 600);
+
+        yourFrame.setVisible(true);
+       
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -198,13 +339,13 @@ public class statsui extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel no_of_lecture;
-    private javax.swing.JLabel no_of_subjects;
     private javax.swing.JLabel no_of_subjects1;
     // End of variables declaration//GEN-END:variables
 }
